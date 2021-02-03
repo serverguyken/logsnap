@@ -1,7 +1,7 @@
 <br />
 <p align="center">
   <a href="https://logsnap.site">
-    <img src="https://res.cloudinary.com/serveryguken/image/upload/v1612379476/Projects/logsnap/logo/LogSnap_mnp0zw.png" width="200" height="200"> 
+    <img src="https://res.cloudinary.com/serveryguken/image/upload/v1612386754/Projects/logsnap/logo/LogSnap-main_xppj6x.svg" width="400" height="200"> 
   </a>
 </p>
 <h3 align="center">Simple tool to Track & Manage Bugs.</h3>
