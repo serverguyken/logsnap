@@ -4,7 +4,7 @@
     <img src="https://res.cloudinary.com/serveryguken/image/upload/v1612386754/Projects/logsnap/logo/LogSnap-main_xppj6x.svg" width="400" height="200"> 
   </a>
 </p>
-<h3 align="center">Simple tool to Track & Manage Bugs.</h3>
+<h3 align="center">Simple tool to Track & Manage Isuues.</h3>
 
 <br />
 
@@ -25,12 +25,13 @@
 
 ##  Features
 
-- Create Bugs
-- View Bugs
+- Create Issues
+- Create Todos
+- View Issues
 - Comment
-- Update Bugs
-- Delete Bugs
-- Bug labels
+- Update Issues
+- Delete Issues
+- Isuue Labels
 
 ------
 

@@ -1,20 +1,26 @@
 <template >
-    <div>
-        <Nav></Nav>
-        <Main></Main>
-        <Footer></Footer>
-    </div>
+  <div>
+    <div class="main">
+         <div id="header-comp">
+           <Header />
+         </div>
+         <div id="content-comp">
+           <slot></slot>
+         </div>
+         <div id="footer-comp">
+         <Footer />
+         </div>
+      </div>
+  </div>
 </template>
 <script>
-import Nav from './Nav'
-import  Main from './Main'
-import Footer from './Footer'
+import Header from "./Header";
+import Footer from "./Footer";
 export default {
-    name: "Layout",
-    components: {
-        Nav,
-        Main,
-        Footer
-    }
-}
+  name: "Layout",
+  components: {
+    Header,
+    Footer,
+  },
+};
 </script>

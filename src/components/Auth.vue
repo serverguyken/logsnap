@@ -1,10 +1,11 @@
 <template>
-    <div>
+    <div class="bg-white">
+        <Loader v-show="isLoading" />
         <div>
-           <div class="login-component" v-show="isLogin">
+           <div class="_k5o4" v-show="isLogin">
                <Login />
            </div>
-          <div class="signup-component" v-show="isSignUp">
+          <div class="itk4" v-show="isSignUp">
                <Signup />
           </div>
         </div>
@@ -12,21 +13,25 @@
     </div>
 </template>
 <script>
+import Loader from './Loader'
 import Login from "./Login"
 import Signup from "./Signup"
 export default {
-    name: 'Footer',
+    name: 'Auth',
+    components: {
+        Login,
+        Signup,
+        Loader
+    },
     data() {
         return {
             isLogin: false,
             isSignUp: false,
+            isLoading: true,
         }
     },
-    components: {
-        Login,
-        Signup,
-    },
     mounted() {
+        setTimeout(() => {
         const routeName = this.$route.name;
         switch (routeName) {
             case "login":
@@ -38,11 +43,26 @@ export default {
             default:
                 break;
         }
+            this.isLoading = false;
+        },1000)
     },
-    computed: {
-    currentRouteName() {
-        return this.$route.name;
+    watch:{
+        $route (to,from) {
+            const routeName = to.name;
+        switch (routeName) {
+            case "login":
+                this.isLogin = true
+                this.isSignUp = false
+                break;
+            case "signup":
+                this.isSignUp = true
+                this.isLogin = false
+                break;
+            default:
+                break;
+        }
+        from
+        }
     }
-}
 }
 </script>
