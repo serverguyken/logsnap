@@ -12,6 +12,10 @@ module.exports = {
         gray: {
           dark: 'rgb(60, 65, 73)',
           dim: "#6a6a6a"
+        },
+        status: {
+          inProgressLight: '#bfebff',
+          inProgressDark: '#526f8d'
         }
       }
     },

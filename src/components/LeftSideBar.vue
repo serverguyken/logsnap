@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="aside-left" class="border-r">
-      <aside class="z-20 hidden w-40 max-w-md overflow-y-auto border-r  dark:bg-gray-800 md:block flex-shrink-0 h-screen">
+      <aside class="z-50 fixed  left-0 bg-white  border-r  dark:bg-gray-800  h-screen">
         <div class="left-main space-mb-sides p-4">
           <div class="cmp-pf-con flex items-center">
             <div
