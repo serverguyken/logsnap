@@ -7,6 +7,7 @@ import Pricing from '../components/Pricing.vue'
 import About from '../components/About.vue'
 import Contact from '../components/Contact.vue'
 import Issues from '../components/Issues.vue'
+import EditIssue from '../components/EditIssue.vue'
 import Backlog from '../components/Backlog.vue'
 import Todo from '../components/Todo.vue'
 import Settings from '../components/Settings.vue'
@@ -20,7 +21,7 @@ const routes = [
      name: 'home',
      component: Main,
      meta: {
-       title: "LogSnap | Bug Tracking"
+       title: "LogSnap | Issue Tracking"
      }
      },
      {
@@ -85,7 +86,15 @@ const routes = [
          component: Issues,
          meta: {
             title: "Issues| Dashboard"
-        }
+        },
+     },
+     {
+         name: "Issue",
+         path: "/dashboard/issues/:id",
+         component: EditIssue,
+         meta: {
+            title: "Issue"
+        },
      },
      {
          path: "/dashboard/backlog",

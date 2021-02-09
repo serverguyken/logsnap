@@ -364,6 +364,34 @@ body {
         width: 50%;
         margin-left: 1rem;
     }
+    .created-at {
+        font-size: 14px !important;
+    }
+    .issues-list  {
+        font-size: 14px !important;
+    }
+    .issues-data-hd {
+        font-size: 14px !important;
+    }
+    .status-con {
+        display: none;
+    }
+    .created-at{
+        display: none;
+    }
+    .priority {
+        display: none;
+    }
+    .action {
+        margin-right: 0px;
+        margin-left: 2px;
+    }
+    .status-con h1 {
+        margin-right: 0px;
+    }
+    .action h1 {
+        display: none;
+    }
 }
 
 @media (max-width: 700px) {
