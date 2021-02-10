@@ -108,7 +108,11 @@
 
               <li class="mb-1 p-1 dash-link">
                 <router-link
+<<<<<<< HEAD
                   to="/settings/account/profile"
+=======
+                  to="/dashboard/settings"
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
                   class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
                 >
                   <div class="icon-con">

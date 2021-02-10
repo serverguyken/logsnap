@@ -1,5 +1,6 @@
 <template>
   <div>
+<<<<<<< HEAD
     <div class="st-mb-top-header">
       <div class="st-mb-top p-3 bg-white fixed top-0 w-full border-b">
         <div class="flex items-center">
@@ -71,6 +72,12 @@
       <aside class="bg-settings-light shadow-sm px-3 py-3 pb-30">
         <div class="left-main space-mb-sides p-2">
           <div class="cmp-pf-con flex items-center  mt-3">
+=======
+    <div id="settings-left">
+      <aside class="bg-white border-r right-border top-0 left-0 h-screen">
+        <div class="left-main space-mb-sides p-2">
+          <div class="cmp-pf-con flex items-center">
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
             <div class="back-btn p-3">
               <router-link to="/dashboard/issues">
                 <svg
@@ -99,7 +106,11 @@
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
+<<<<<<< HEAD
                   class="w-5 text-gray-600"
+=======
+                  class="w-5 text-gray-500"
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
                 >
                   <path
                     stroke-linecap="round"
@@ -108,6 +119,7 @@
                     d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
+<<<<<<< HEAD
                 <div class="acc-txt ml-4">
                   <h1 class="text-sm text-gray-600 font-bold">Account</h1>
                 </div>
@@ -282,6 +294,21 @@
                       <p class="text-sm  text-black font-normal">
                         {{ workSpaceLink.name }}
                       </p>
+=======
+                <div class="acc-txt  ml-4">
+                  <h1 class="text-sm text-gray-500 font-medium">Account</h1>
+                </div>
+              </div>
+              
+              <ul>
+                <li class="">
+                  <router-link
+                    to="/"
+                    class="dash-link  hover:bg-gray-100 rounded text-sm"
+                  >
+                    <div class="link-txt ml-9">
+                      <p class="text-sm font-medium text-gray-700">Issues</p>
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
                     </div>
                   </router-link>
                 </li>
@@ -296,6 +323,7 @@
 <script>
 export default {
   name: "LeftSideSettings",
+<<<<<<< HEAD
   data() {
     return {
       accLinks: [
@@ -322,5 +350,7 @@ export default {
       this.isMobileOpen = false
     },
   }
+=======
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 };
 </script>

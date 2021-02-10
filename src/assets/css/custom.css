@@ -107,7 +107,10 @@ body {
     color: var(--main-color);
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 .dash-link .exact-active {
     color: #05b7c1;
     background-color: #d1edef;
@@ -117,6 +120,7 @@ body {
     color: #05b7c1;
 }
 
+<<<<<<< HEAD
 .settings-link .exact-active div  {
     background-color: #def5f7;
 }
@@ -139,6 +143,11 @@ body {
     -o-transform: translate(-50%,-50%);
 }
 /* Settings ends */
+=======
+
+/* Dashboard */ 
+
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 .rd-cn-sm {
     height: 24px;
     width: 24px;
@@ -367,6 +376,7 @@ body {
     .input-card {
         flex-wrap: nowrap;
     }
+<<<<<<< HEAD
     .settings-ds {
         display: block;
     }
@@ -376,6 +386,8 @@ body {
     .st-mb-top-header {
         display: none;
     }
+=======
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 }
 
 @media (min-width: 600px) {
@@ -421,12 +433,15 @@ body {
     .action h1 {
         display: none;
     }
+<<<<<<< HEAD
     .sd-date {
         display: none;
     }
     .sd-lead {
         display: none;
     }
+=======
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 }
 
 @media (max-width: 700px) {
@@ -503,7 +518,10 @@ body {
     .action h1 {
         display: none;
     }
+<<<<<<< HEAD
     
+=======
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 }
 
 @media (max-width: 1020px) {
@@ -544,6 +562,7 @@ body {
     .dash-mb-icon-menu {
         display: block;
     }
+<<<<<<< HEAD
     .settings {
         display: block;
     }
@@ -567,6 +586,8 @@ body {
         left: 0;
         margin-top: 9px;
     }
+=======
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 }
 
 @media (max-width: 600px) {

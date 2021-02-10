@@ -6,6 +6,7 @@ import Features from '../components/Features.vue'
 import Pricing from '../components/Pricing.vue'
 import About from '../components/About.vue'
 import Contact from '../components/Contact.vue'
+<<<<<<< HEAD
 import Projects from '../components/Projects.vue'
 import Issues from '../components/Issues.vue'
 import EditViewIssue from '../components/EditViewIssue.vue'
@@ -20,6 +21,13 @@ import IntegrationsSettings from '../components/IntegrationsSettings.vue'
 import APISettings from '../components/APISettings.vue'
 import PlansSettings from '../components/PlansSettings.vue'
 import BillingSettings from '../components/BillingSettings.vue'
+=======
+import Issues from '../components/Issues.vue'
+import EditIssue from '../components/EditIssue.vue'
+import Backlog from '../components/Backlog.vue'
+import Todo from '../components/Todo.vue'
+import Settings from '../components/Settings.vue'
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
 import NotFound from '../components/NotFound.vue';
 
 
@@ -98,6 +106,7 @@ const routes = [
         },
      },
      {
+<<<<<<< HEAD
          path: "/dashboard/projects/",
          component: Projects,
          meta: {
@@ -108,6 +117,11 @@ const routes = [
          name: "Issue",
          path: "/dashboard/issues/:id",
          component: EditViewIssue,
+=======
+         name: "Issue",
+         path: "/dashboard/issues/:id",
+         component: EditIssue,
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
          meta: {
             title: "Issue"
         },
@@ -127,6 +141,7 @@ const routes = [
         }
      },
      {
+<<<<<<< HEAD
          path: "/settings/account/profile",
          component: ProfileSettings,
          meta: {
@@ -190,6 +205,14 @@ const routes = [
         },
      },
 
+=======
+         path: "/dashboard/settings",
+         component: Settings,
+         meta: {
+            title: "Settings"
+        }
+     },
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
      {
          path: "/:pathMatch(.*)*",
          component: NotFound,
@@ -215,7 +238,10 @@ router.afterEach((to, from) => {
     //   document.body.classList.remove('dark');
     // }
     document.title = to.meta.title;
+<<<<<<< HEAD
     
+=======
+>>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
     from
   })
 
