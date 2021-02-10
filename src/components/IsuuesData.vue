@@ -2,11 +2,7 @@
   <div>       <div class="blocker  absolute w-full h-screen top-0 left-0 right-0 bottom-0" v-if="actionClicked" @click="actionClicked = false">
         
     </div>
-<<<<<<< HEAD
     <div class="issues-data-hd bg-gray-100 text-gray-400 p-2 mt-3">
-=======
-    <div class="issues-data-hd bg-gray-300 text-gray-400 p-2 mt-3">
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
       <div class="grid grid-cols-5">
         <div class="flex items-center">
           <div class="issue-name">
@@ -195,11 +191,7 @@ export default {
     }
   },
   mounted() {
-<<<<<<< HEAD
    
-=======
-    console.log( this.$store.getters.getDoneIssues);
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
   },
   computed: mapGetters(['getallIssues'])
 };

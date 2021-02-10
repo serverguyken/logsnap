@@ -30,11 +30,7 @@
 
             <h1 class="mt-6 text-gray-60">Your Isuues</h1>
 
-<<<<<<< HEAD
                     <div class="issues-comp animate-slide">
-=======
-                    <div class="issues-comp">
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
                       <IssuesData />
                     </div>
            

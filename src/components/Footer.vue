@@ -15,11 +15,7 @@
           <ul class="footer-links flex flex-row items-center">
             <li class="ml-5 hover:text-main-normal font-normal"><a href="https://docs.logsnap.site">Docs</a></li>
             <li v-for="link in links" :key="link.name" class="ml-5 hover:text-main-normal font-normal">
-<<<<<<< HEAD
               <router-link :to="link.path">{{link.name}}</router-link>
-=======
-              <router-link :to="link.route">{{link.name}}</router-link>
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
             </li>
           </ul>
         </div>
@@ -33,15 +29,9 @@ export default {
   data() {
     return {
       links: [
-<<<<<<< HEAD
         { name: "Features", path: "/features" },
         { name: "Terms of Service", path: "/terms" },
         { name: "Privacy", path: "/privacy" },
-=======
-        { name: "Features", route: "/features" },
-        { name: "Terms of Service", route: "/terms" },
-        { name: "Privacy", route: "/privacy" },
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
       ],
     };
   },

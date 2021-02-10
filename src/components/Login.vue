@@ -43,7 +43,7 @@
                   <button id="workspaceBtn" class="w-full focus:outline-none outline-none rounded-sm bg-main-normal text-white p-2" ref="workspaceBtn" @click="checkWorkspace()">Continue</button>
             </div>
             <div class="error-con mt-4 mb-3" v-if="isWkError">
-                    <p ref="lgError" class="text-sm font-medium text-red-600">s</p>
+                    <p ref="lgError" class="text-sm font-medium text-red-600"></p>
             </div>
       </div>
         <div v-show="isWorkSpace"
@@ -66,7 +66,7 @@
                 >Password</label
               >
               <input
-                type="text"
+                type="password"
                 id="lsPassword"
                 ref="lsPassword"
                 class="border border-gray-200 rounded-sm p-2 w-full mt-1 focus:outline-none focus:ring-1 focus:ring-main-normal appearance-none"

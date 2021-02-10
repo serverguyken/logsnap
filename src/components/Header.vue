@@ -23,11 +23,7 @@
               :key="link.name"
               class="li-link text-gray-500 text-sm font-medium hover:text-main-normal ml-5 mr-5"
             >
-<<<<<<< HEAD
               <router-link :to="link.path">{{ link.name }}</router-link>
-=======
-              <router-link :to="link.route">{{ link.name }}</router-link>
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
             </li>
             <div
               v-show="intHovered"
@@ -153,11 +149,7 @@
               :key="link.name"
               class="li-link pt-3 pb-2 text-gray-600 font-medium"
             >
-<<<<<<< HEAD
               <router-link :to="link.path">{{ link.name }}</router-link>
-=======
-              <router-link :to="link.route">{{ link.name }}</router-link>
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
             </li>
           </ul>
         </div>
@@ -174,19 +166,11 @@ export default {
       scrollPosition: null,
       intHovered: false,
       links: [
-<<<<<<< HEAD
         { name: "Features", path: "/features" },
         // { name: "Integrations", path: "/integrations" },
         { name: "Pricing", path: "/pricing" },
         // { name: "About", path: "/about" },
         // { name: "Contact", path: "/contact" },
-=======
-        { name: "Features", route: "/features" },
-        // { name: "Integrations", route: "/integrations" },
-        { name: "Pricing", route: "/pricing" },
-        // { name: "About", route: "/about" },
-        // { name: "Contact", route: "/contact" },
->>>>>>> 5696b4f01ac4433198711207dde9056e2f4ae783
       ],
     };
   },
