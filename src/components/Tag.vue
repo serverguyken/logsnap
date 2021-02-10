@@ -1,0 +1,42 @@
+<template>
+  <div>
+    <div class="tag">
+      <span :class="[color,backgroundColor,textSize]">{{status}}</span>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+    name: "Tag",
+    props: {
+      status: {
+        type: String,
+            default: "Tag Name"
+      },
+        color: {
+            type: String,
+            default: "text-main-dark"
+        },
+        backgroundColor: {
+            type: String,
+            default: "bg-main-light"
+        },
+        textSize: {
+          type: String,
+          default: "text-xs"
+        }
+    },
+};
+</script>
+
+<style scoped>
+  span {
+    border-radius: 20px;
+    padding: 5px 8px;
+  }
+  @media (max-width: 600px) {
+    span {
+      font-size: 12px;
+    }
+  }
+</style>
