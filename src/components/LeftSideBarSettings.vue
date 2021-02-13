@@ -72,7 +72,7 @@
         <div class="left-main space-mb-sides p-2">
           <div class="cmp-pf-con flex items-center  mt-3">
             <div class="back-btn p-3">
-              <router-link to="/dashboard/issues">
+              <router-link :to="getPreviousRoute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 20 20"
@@ -294,6 +294,8 @@
   </div>
 </template>
 <script>
+import { getPreviousRoute } from '../config/functions'
+import { mapGetters } from 'vuex'
 export default {
   name: "LeftSideSettings",
   data() {
@@ -321,6 +323,10 @@ export default {
     hideMbMenu() {
       this.isMobileOpen = false
     },
-  }
+  },
+  computed: mapGetters(["getPreviousRoute"]),
+  created() {
+    getPreviousRoute()
+  },
 };
 </script>

@@ -14,12 +14,12 @@
                 class="w-8"
               />
             </div>
-            <div class="comp-img bg-blue-600 rd-cn-sm" v-if="!compImage">
+            <div class="comp-img bg-blue-600 rd-cn-sm" v-if="compImage = false">
               <h1 class="text-white font-medium">E</h1>
             </div>
             <div class="cmp-text ml-3">
               <h1 ref="workspaceName" class="text-xs font-medium">
-                Echodesk Technology
+               {{Name}}
               </h1>
             </div>
           </div>
@@ -52,7 +52,7 @@
                 </router-link>
               </li>
 
-              <li class="mb-1 p-1 dash-link">
+              <!-- <li class="mb-1 p-1 dash-link">
                 <router-link
                   to="/dashboard/backlog"
                   class="dash-link flex items-center p-2 hover:bg-gray-100 rounded text-sm"
@@ -104,7 +104,7 @@
                     <p class="text-sm font-medium text-gray-600">Todo</p>
                   </div>
                 </router-link>
-              </li>
+              </li> -->
 
               <li class="mb-1 p-1 dash-link">
                 <router-link
@@ -150,8 +150,10 @@ export default {
   name: "LeftCard",
   data() {
     return {
-      compImage: true,
+      compImage: false,
     };
   },
+  mounted() {
+  }
 };
 </script>

@@ -1,7 +1,7 @@
 <template >
   <div>
     <div class="main">
-         <div id="header-comp">
+         <div id="header-comp" class="add-border">
            <Header />
          </div>
          <div id="content-comp">

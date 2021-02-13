@@ -1,8 +1,8 @@
 <template>
   <div>
     <div id="aside-left" class="border-r">
-      <aside class="fixed z-0  left-0 bg-white  border-r  dark:bg-gray-800  h-screen">
-        <div class="left-main space-mb-sides p-4">
+      <aside class="fixed  shadow-none  left-0 bg-ghostsmoke  border-r border-gray-100  dark:bg-gray-800  h-screen">
+        <div class="left-main mt-5 space-mb-sides p-4">
           <div class="cmp-pf-con flex items-center">
             <div
               class="comp-img rd-cn rounded-xl p-1 bg-gray-100"
@@ -14,12 +14,12 @@
                 class="w-8"
               />
             </div>
-            <div class="comp-img bg-blue-600 rd-cn-sm" v-if="!compImage">
-              <h1 class="text-white font-medium">E</h1>
+            <div class="comp-img  rd-cn-sm ml-1" v-if="!compImage" :style="color">
+              <h1 class="text-white text-sm  font-medium">{{initals}}</h1>
             </div>
             <div class="cmp-text ml-3">
               <h1 ref="workspaceName" class="text-xs font-medium">
-                Echodesk Technology
+                {{name}}
               </h1>
             </div>
           </div>
@@ -27,7 +27,7 @@
             <ul class="mt-4">
               <li class="mb-1 p-1 dash-link">
                 <router-link
-                  to="/dashboard/issues"
+                  :to="{name: 'Issues', params: {id: getRoute}}"
                   class=" flex items-center p-2 hover:bg-gray-100 rounded text-sm"
                 >
                   <div class="icon-con">
@@ -52,9 +52,9 @@
                 </router-link>
               </li>
 
-              <li class="mb-1 p-1 dash-link">
+              <!-- <li class="mb-1 p-1 dash-link">
                 <router-link
-                  to="/dashboard/backlog"
+                  :to="{name: 'Backlog', params: {id: getRoute}}"
                   class="dash-link flex items-center p-2 hover:bg-gray-100 rounded text-sm"
                 >
                   <div class="icon-con">
@@ -81,7 +81,7 @@
 
               <li class="mb-1 p-1 dash-link">
                 <router-link
-                  to="/dashboard/todo"
+                  :to="{name: 'Todo', params: {id: getRoute}}"
                   class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
                 >
                   <div class="icon-con">
@@ -104,7 +104,7 @@
                     <p class="text-sm font-medium text-gray-600">Todo</p>
                   </div>
                 </router-link>
-              </li>
+              </li> -->
 
               <li class="mb-1 p-1 dash-link">
                 <router-link
@@ -146,12 +146,37 @@
   </div>
 </template>
 <script>
+import { getUser, getAuthUser,} from '../config/functions'
 export default {
   name: "LeftSideBar",
   data() {
     return {
-      compImage: true,
+      compImage: false,
+      getRoute: this.$route.fullPath.split('/')[4],
+      name: "",
+      color: "",
+      initals: "",
     };
   },
+  mounted() {
+     const getInitials = function (name) {
+      var parts = name.split(' ')
+      var initials = ''
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i].length > 0 && parts[i] !== '') {
+          initials += parts[i][0]
+        }
+      }
+      return initials
+    }
+    this.getRoute = this.$route.fullPath.split('/')[4]
+      getAuthUser().then(user => {
+       getUser(user.uid).then(user => {
+       this.name = user.fullName
+       this.initals = getInitials(this.name)
+       this.color = `background-color: ${user.coloruserSetActive};`
+    })
+    })
+  }
 };
 </script>

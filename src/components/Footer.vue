@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="sticky bottom-0  bg-gray-800 w-full text-white">
+    <footer class="sticky bottom-0  bg-gray-800 w-full text-white border-0">
       <hr class="add-border" />
       <div class="footer-con flex justify-between items-center space-mb-sides py-4 px-4 ml-auto mr-auto">
         <div class="footer-logo -ml-1">

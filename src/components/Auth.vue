@@ -33,6 +33,12 @@ export default {
     mounted() {
         setTimeout(() => {
         const routeName = this.$route.name;
+        // const query = this.$route.query.method
+        // switch(query) {
+        //     case "login": 
+        //       this.isLogin = true
+        //     break;
+        // }
         switch (routeName) {
             case "login":
                 this.isLogin = true

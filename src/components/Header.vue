@@ -1,11 +1,11 @@
 <template>
   <div>
     <header
-      class="ds-nav bg-color fixed z-50 top-0 w-full add-border"
+      class="ds-nav bg-color fixed z-50  top-0 w-full"
       ref="dsNav"
     >
       <nav
-        class="ds-nav-con flex flex-row items-center justify-between space-mb-sides py-4 px-4 ml-auto mr-auto"
+        class="ds-nav-con flex  flex-row items-center justify-between space-mb-sides py-4 px-4 ml-auto mr-auto"
       >
         <div class="logo-img">
           <router-link to="/">

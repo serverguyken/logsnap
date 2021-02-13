@@ -1,5 +1,5 @@
 <template>
-  <div>       <div class="blocker  absolute w-full h-screen top-0 left-0 right-0 bottom-0" v-if="actionClicked" @click="actionClicked = false">
+  <div>       <div class="blocker  absolute w-full h-screen top-0 left-0 right-0 bottom-0 z-0" v-if="actionClicked" @click="actionClicked = false">
         
     </div>
     <div class="issues-data-hd bg-gray-100 text-gray-400 p-2 mt-3">
@@ -173,7 +173,8 @@ export default {
   data() {
     return {
       actionClicked: false,
-      issues: []
+      issues: [],
+      issuePath: ''
     }
   },
   methods: {
@@ -191,7 +192,6 @@ export default {
     }
   },
   mounted() {
-   
   },
   computed: mapGetters(['getallIssues'])
 };

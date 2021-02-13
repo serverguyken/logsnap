@@ -1,11 +1,11 @@
 <template>
   <div>
     <Layout>
-      <div id="page-pricing" class="pt-16">
+      <div id="page-pricing" class="pt-16 border-0">
         <div class="pring-main">
           <div class="pricing-hd">
-            <div class="pricing-hd-txt bg-main-dark text-white pt-8 p-3">
-              <h1 class="text-xl text-gray-300 font-bold text-center">
+            <div class="pricing-hd-txt bg-main-dark border-0 text-white pt-6 p-3">
+              <h1 class="text-xl  text-gray-300 font-bold text-center">
                 PRICING
               </h1>
               <h1 class="text-5xl font-bold mt-5 text-center">
@@ -66,7 +66,7 @@
                               class="py-2 focus:outline-none bg-main-color text-white text-lg font-medium w-full rounded hover:opacity-80"
                               @click="getPlan()"
                             >
-                              Sign up
+                              Sign  Up
                             </button>
                           </router-link>
                         </div>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="card-price px-4 mt-1">
                       <h1 class="font-bold text-5xl text-main-dark">
-                        $35<span class="font-medium text-2xl">/month</span>
+                        $5<span class="font-medium text-2xl">/month</span>
                       </h1>
                     </div>
                     <div
@@ -123,7 +123,7 @@
                               class="py-2 focus:outline-none bg-main-color text-white text-lg font-medium w-full rounded hover:opacity-80"
                               @click="setPlan()"
                             >
-                              Sign up
+                              Sign Up
                             </button>
                           </router-link>
                         </div>
