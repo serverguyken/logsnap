@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-    <a href="https://logsnap.site">View Demo</a>
+    <!-- <a href="https://logsnap.site">View Demo</a> -->
     ·
     <a href="https://github.com/serverguyken/logsnap/issues">Report Bug</a>
     ·
