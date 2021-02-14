@@ -9,42 +9,8 @@ const state = {
     projectDatas: [],
     getPreviousRoute: "",
     isWorkSpaceName: "",
-    issues: [
-        {
-            id: "IS#1",
-            description: "Fix header on pricing page",
-            createdAt: "01/31/2021",
-            status: "IN PROGRESS",
-            priority: "Low",
-            statusColor: "text-status-inProgressDark",
-            statusBackgroundColor: "bg-status-inProgressLight",
-            priorityColor: "text-green-600",
-            priorityBackgroundColor: "bg-green-900",
-        },
-        {
-            id: "IS#2",
-            description: "Login button not working on mobile",
-            createdAt: "02/08/2021",
-            status: "DONE",
-            priority: "HIGH",
-            statusColor: "text-white",
-            statusBackgroundColor: "bg-green-400",
-            priorityColor: "text-red-600",
-            priorityBackgroundColor: "bg-green-900",
-        },
-        {
-            id: "IS#3",
-            description: "Trying to see if text the ellipisi will work",
-            createdAt: "02/08/2021",
-            status: "CANCELLED",
-            priority: "MEDIUM",
-            statusColor: "text-white",
-            statusBackgroundColor: "bg-red-600",
-            priorityColor: "text-yellow-400",
-            priorityBackgroundColor: "bg-green-900",
-        },
-
-    ]
+    issuesData: [],
+    getIssue: [],
 };
 
 const getters = {
@@ -66,7 +32,9 @@ const getters = {
         return project.id === id
     }),
     getPreviousRoute: (state) => state.getPreviousRoute,
-    getWorkSpaceName: (state) => state.isisWorkSpaceName
+    getWorkSpaceName: (state) => state.isisWorkSpaceName,
+    getIssuesDatas: (state) => state.issuesData,
+    getIssueData: (state) => state.getIssue,
 };
 
 const actions = {
@@ -108,8 +76,8 @@ const mutations = {
     SET_USER(state, data) {
         state.user.data = data
     },
-    SET_PROJECTS_DATAS (state, datas) {
-     state.projectDatas = datas
+    SET_PROJECTS_DATAS (state, data) {
+     state.projectDatas = data
     },
     SET_PREVIOUS_ROUTE (state, route) {
      state.getPreviousRoute = route 
@@ -117,6 +85,12 @@ const mutations = {
     DELETE_PROJECT: (state, path) => state.projectDatas = state.projectDatas.filter(project => project.path !== path),
     SET_WORKSPACE_NAME (state, workSpaceName) {
         state.isWorkSpaceName = workSpaceName
+    },
+    SET_ISSUES_DATAS (state, data) {
+        state.issuesData = data
+    },
+    SET_ISSUE (state, data) {
+         state.getIssue = data
     }
 };
 

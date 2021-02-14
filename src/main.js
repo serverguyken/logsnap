@@ -9,7 +9,6 @@ import { useField } from  'vee-validate'
 import { auth } from './config/functions'
 
 
-
 const app = createApp(App);
 
 auth.onAuthStateChanged(user => {

@@ -5,11 +5,11 @@
     <div class="issues-data-hd bg-gray-100 text-gray-400 p-2 mt-3">
       <div class="grid grid-cols-5">
         <div class="flex items-center">
-          <div class="issue-name">
+          <!-- <div class="issue-name">
             <h1 class="text-sm">ID</h1>
-          </div>
-          <div class="issue-desc ml-10">
-            <h1 class="text-sm">Description</h1>
+          </div> -->
+          <div class="issue-desc mr-10">
+            <h1 class="text-sm">Summary</h1>
           </div>
         </div>
         <div class="status-con col-span-1 col-start-3 ml-3">
@@ -20,7 +20,7 @@
         </div>
         <div class="aside-fl-flex grid grid-cols-2 items-center col-start-5">
           <div class="created-at">
-            <h1 class="text-sm">Created At</h1>
+            <h1 class="text-sm">Tags</h1>
           </div>
           <!-- <div class="action col-start-6 col-end-5">
             <h1 class="text-sm">Action</h1>
@@ -30,10 +30,11 @@
     </div>
         <div
       class="issues-list mt-3 hover:bg-gray-100 cursor-pointer px-1 py-2 rounded"
-      v-for="issue in getallIssues"
+      v-for="issue in getIssuesDatas"
       :key="issue.id"
     >
-      <router-link class="grid grid-cols-5 items-center"  :to="{name: 'Issue', params: {id: issue.id}}">
+    
+      <router-link class="grid grid-cols-5 items-center"  :to="{name: 'Issue', params: {projectid: issue.projectid, id: issue.id}, }">
         <div class="issues-flex flex items-center">
           <div class="issue-id-con flex items-center">
             <svg
@@ -48,14 +49,21 @@
                 clip-rule="evenodd"
               />
             </svg>
-            <h1 class="text-gray-500 ml-1">{{ issue.id }}</h1>
+           <!-- <div class="issue-short-desc ml-2 max-w-xs w-20 whitespace-nowrap">
+            <h1
+              class="text-gray-500 font-medium ml-1 overflow-hidden overflow-ellipsis"
+              ref="description"
+            >
+              {{ issue.id }}
+            </h1>
+          </div> -->
           </div>
           <div class="issue-short-desc ml-2 max-w-xs w-52 whitespace-nowrap">
             <h1
               class="text-gray-800 font-medium ml-1 overflow-hidden overflow-ellipsis"
               ref="description"
             >
-              {{ issue.description }}
+              {{ issue.summary }}
             </h1>
           </div>
         </div>
@@ -68,12 +76,17 @@
           />
         </div>
         <div class="priority col-start-4">
-          <h1 :class="issue.priorityColor">{{ issue.priority }}</h1>
+          <Tag
+            :status="issue.priority"
+            :color="issue.priorityColor"
+            :backgroundColor="issue.priorityBackgroundColor"
+            size="p-4"
+          />
         </div>
         <div class="aisde-fl grid grid-cols-2 items-center col-start-5">
-          <div class="created-at mr-5">
+          <!-- <div class="created-at mr-5">
             <h1 class="text-sm">{{ issue.createdAt }}</h1>
-          </div>
+          </div> -->
           <!-- <div class="relative action mr-4 col-start-6 col-end-5">
             <button @click="showAction()" class="focus:outline-none outline-none">
               <svg
@@ -159,10 +172,12 @@
           </div> -->
         </div>
       </router-link>
+      
       </div>
   </div>
 </template>
 <script>
+import { getAllIssues } from "../config/functions"
 import Tag from "./Tag";
 import { mapGetters } from 'vuex';
 export default {
@@ -193,6 +208,9 @@ export default {
   },
   mounted() {
   },
-  computed: mapGetters(['getallIssues'])
+  computed: mapGetters(['getIssuesDatas']),
+  created() {
+    getAllIssues(this.$route.fullPath.split("/")[4])
+  }
 };
 </script>

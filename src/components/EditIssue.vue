@@ -1,25 +1,32 @@
-<template >
-    <div>
-        <div id="issue-edit" class="flex justify-center items-center">
+<template>
+  <div>
+    <h1></h1>
+    <!-- <div id="issue-edit" class="flex justify-center items-center">
             {{$route.params}}
             <h1>{{issue}}</h1>
-        </div>
-    </div>
+        </div> -->
+  </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 export default {
-    name: "EditIssue",
-    data() {
-        return {
-            issue: ""
-        }
+  name: "EditIssue",
+  props: {
+    projectid: {
+      type: String,
+      required: true,
     },
-    methods: {
-        ...mapActions(['viewIssue'])
-    },
-    mounted() {
-        this.issue = this.$store.getters.getIssue(this.$route.params.id)
-    }
-}
+  },
+  data() {
+    return {
+      issue: "",
+    };
+  },
+  methods: {
+    ...mapActions(["viewIssue"]),
+  },
+  mounted() {
+    this.issue = this.$store.getters.getIssue(this.$route.params.id);
+  },
+};
 </script>

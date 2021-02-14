@@ -55,7 +55,7 @@
         <div
           class="dash-header-search ml-2 flex justify-between items-center space-mb-sides p-1 w-full"
         >
-          <div class="w-full py-2">
+          <div class="search-main w-full py-2">
             <div
               class="dash-h-con flex items-center rounded bg-gray-100 py-1 px-2 w-48 max-w-full"
             >
@@ -88,27 +88,34 @@
               </div>
             </div>
           </div>
+          <div class="mb-create-issue">
+            <button
+              class="bg-main-dark outline-none rounded px-1 py-1 focus:outline-none"
+              @click="openCreateModal"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-6 text-white"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+            </button>
+          </div>
           <div class="add-is tooltip">
             <div class="flex">
               <button
-                @click="openCreateModal"
-                class="bg-main-normal flex rounded px-2 py-1 outline-none focus:outline-none"
+                @click="openIssueModal = true"
+                class="bg-main-normal rounded px-5 py-1 outline-none focus:outline-none text-white h-8"
               >
-                <!-- <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    class="w-6 text-white"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    />
-                  </svg> -->
-                <span class="text-white font-medium text-sm">Create</span>
+                Create
               </button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +138,7 @@
                 </div> -->
           </div>
           <div
-            class="absolute z-50 right-0 mr-4 bg-white border-t shadow rounded-sm p-2 animate-slide"
+            class="absolute z-50 right-0 mr-4 open-cc bg-white border-t shadow rounded-sm p-2 animate-slide"
             style="margin-top: 10.45rem"
             v-if="openAccAction"
           >
@@ -236,7 +243,7 @@
                   </router-link>
                 </li>
 
-                <li class="mb-1 p-1 dash-link">
+                <!-- <li class="mb-1 p-1 dash-link">
                   <router-link
                     :to="{ name: 'Backlog', params: { id: getRoute } }"
                     class="dash-link flex items-center p-2 hover:bg-gray-100 rounded text-sm"
@@ -261,9 +268,9 @@
                       <p class="text-sm font-medium text-gray-600">Backlog</p>
                     </div>
                   </router-link>
-                </li>
+                </li> -->
 
-                <li class="mb-1 p-1 dash-link">
+                <!-- <li class="mb-1 p-1 dash-link">
                   <router-link
                     :to="{ name: 'Todo', params: { id: getRoute } }"
                     class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
@@ -288,7 +295,7 @@
                       <p class="text-sm font-medium text-gray-600">Todo</p>
                     </div>
                   </router-link>
-                </li>
+                </li> -->
 
                 <li class="mb-1 p-1 dash-link">
                   <router-link
@@ -322,30 +329,35 @@
                     </div>
                   </router-link>
                 </li>
+                <li class="mb-1 p-1 dash-link">
+                  <button
+                    class="lg-btn bg-main-normal shadow rounded text-sm text-white py-1 hover:bg-main-light mt-3 w-24 outline-none focus:outline-none"
+                    @click="logOut"
+                  >
+                    <span
+                      class="outline-none focus:outline-none text-sm text-white"
+                    >
+                      Log out
+                    </span>
+                  </button>
+                </li>
               </ul>
             </div>
           </div>
         </aside>
       </div>
     </div>
-    <div class="issue-modal">
+    <div class="issue-modal " v-if="openIssueModal">
       <div class="modal">
         <div class="modal-contents">
           <div class="fixed z-50 inset-0 overflow-y-auto">
             <div
               class="flex items-end cr-is-top justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
             >
-              <!--
-      Background overlay, show/hide based on modal state.
-
-      Entering: "ease-out duration-300"
-        From: "opacity-0"
-        To: "opacity-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100"
-        To: "opacity-0"
-    -->
-              <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+              <div
+                class="fixed inset-0 overflow-x-auto transition-opacity"
+                aria-hidden="true"
+              >
                 <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
               </div>
 
@@ -355,24 +367,14 @@
                 aria-hidden="true"
                 >&#8203;</span
               >
-              <!--
-      Modal panel, show/hide based on modal state.
-
-      Entering: "ease-out duration-300"
-        From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-        To: "opacity-100 translate-y-0 sm:scale-100"
-      Leaving: "ease-in duration-200"
-        From: "opacity-100 translate-y-0 sm:scale-100"
-        To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-    -->
               <div
-                class="inline-block cr-modal align-bottom w-5/6 bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                class="inline-block cr-modal align-bottom w-5/6 bg-white rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-headline"
               >
                 <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                  <div class="sm:flex sm:items-start">
+                  <div class="pl-1 pr-1">
                     <div class="mt-3 sm:mt-0 sm:ml-4 sm:text-left">
                       <h3
                         class="text-lg leading-6 font-medium text-gray-700"
@@ -381,31 +383,215 @@
                         Create Issue
                       </h3>
                       <div class="mt-2">
-                        <p class="text-xs text-gray-600">Summary</p>
+                        <p class="text-xs text-gray-600">
+                          Summary<span class="text-red-500">&#x2a;</span>
+                        </p>
                       </div>
                       <div class="mt-0 w-full">
                         <input
                           type="text"
-                          class="bg-gray-300 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
+                          v-model="issue.summary"
+                          required
+                          ref="summary"
+                          class="bg-gray-200 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
+                        />
+                        <p class="text-xs text-red-600 hidden" ref="summaryError">Summary can't be empty</p>
+                      </div>
+                      <div class="dsc-group mt-1">
+                        <div class="mt-2">
+                          <p class="text-xs text-gray-600">
+                            Description<span class="text-red-500">&#x2a;</span>
+                          </p>
+                        </div>
+                        <div class="mt-o">
+                          <div class="cnt-area border w-full">
+                            <textarea
+                              name="content"
+                              v-model="issue.description"
+                              ref="description"
+                              required
+                              id="descContent"
+                              class="w-full p-1 h-30 text-sm max-h-56 focus:outline-none outline-none appearance-none"
+                            >
+                            </textarea>
+                          </div>
+                          <p class="text-xs text-red-600 hidden" ref="descriptionError">Summary can't be empty</p>
+                        </div>
+                      </div>
+                      <div class="label-group mt-1">
+                        <div class="mt-o">
+                          <div class="">
+                            <p class="text-xs text-gray-600">
+                              Label<span class="text-red-500">&#x2a;</span>
+                            </p>
+                          </div>
+                          <input
+                            type="text"
+                            ref="label"
+                            v-model="issue.labels"
+                            @input="labelTyped = true"
+                            class="bg-gray-200 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
+                            @keydown.enter="addTag"
+                          />
+                          <div
+                            class="tags-con relative flex flex-wrap mt-2 pl-0"
+                          >
+                            <div
+                              class="mr-1 mt-1 bg-main-light opacity-80 text-xs rounded-lg px-1 flex items-center"
+                              v-for="(tag, index) in issue.tags"
+                              :key="index"
+                            >
+                              <p
+                                class="overflow-ellipsis"
+                                style="font-size: 0.6rem"
+                              >
+                                {{ tag }}
+                              </p>
+                              <div class="cancel-label">
+                                <svg
+                                  @click="removeLabel(tag)"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  class="w-2 cursor-pointer"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                  />
+                                </svg>
+                              </div>
+                            </div>
+                            <div
+                              class="label-suggest absolute z-50 shadow-sm border border-gray-100 top-0 w-full bg-white p-1"
+                              v-if="labelTyped"
+                            >
+                              <div class="label-textx bg-gray-200 p-1">
+                                <div class="text-xs flex">
+                                  <p>{{ issue.labels }}</p>
+                                  <h1 class="text-xs ml-1">Add Label</h1>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="drop-file drop-zone upload mt-2">
+                        <p class="text-xs text-gray-600">Attachment</p>
+                        <div
+                          class="flex justify-center mt-2 border-2 py-2 border-gray-200 border-dashed"
+                        >
+                          <p class="text-xs">
+                            <span
+                              ><button
+                                @click="handleFileUpload"
+                                class="text-xs text-main-normal focus:outline-none outline-none bg-white hover:underline"
+                              >
+                                Upload
+                              </button></span
+                            >
+                          </p>
+                        </div>
+                        <input
+                          type="file"
+                          class="input-dsnone"
+                          ref="uploadBtn"
+                          name="isFileName"
+                          accept="image/x-png,image/gif,image/jpeg"
                         />
                       </div>
-                      <div class="mt-2">
-                        <p class="text-xs text-gray-600">Description</p>
+                      <div class="selectedFile w-full -mt-2" v-if="upLoading">
+                        <div class="flex justify-between items-center">
+                          <div class="file-preview">
+                            <div class="flex">
+                              <img
+                                :src="attachmentURL"
+                                alt=""
+                                ref="selectedfile"
+                                class="w-6"
+                              />
+                              <p ref="isFileName" class="ml-1 text-xs"></p>
+                            </div>
+                            <div class="flex justify-between">
+                              <div class="upload-progress ml-7">
+                                <p v-if="upLoading" class="text-xs">
+                                  {{ uploadValue.toFixed() + "%" }}
+                                </p>
+                                <progress
+                                  :value="uploadValue"
+                                  class="appearance-none w-96 h-1"
+                                ></progress>
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            class="file-size cancel-con flex items-center -ml-8"
+                          >
+                            <p class="text-xs mr-1">{{ fileSize }}</p>
+                            <div
+                              class="delete-btn hover:bg-gray-200 cursor-pointer rounded-2xl p-1"
+                              v-if="upLoading"
+                              @click="deleteFile"
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                class="w-5 text-gray-600 cursor-pointer"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="mt-o">
-                        <textarea id="editor" ref="editor"></textarea>
+                      <div class="status-select mt-2 w-full">
+                        <p class="text-xs text-gray-600">Status</p>
+                        <div class="selecxt">
+                          <select
+                            v-model="issue.status"
+                            class="w-2/4 bg-gray-200 py-1 text-sm rounded-sm border focus:outline-none outline-none focus:bg-white focus:border=gray-200"
+                          >
+                            <option value="Open">Open</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Fixed">Fixed</option>
+                            <option value="Closed">Closed</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="status-select mt-3 w-full">
+                        <div class="selecxt">
+                          <p class="text-xs text-gray-600">Priority</p>
+                          <select
+                            v-model="issue.priority"
+                            class="w-2/4 bg-gray-200 py-1 text-sm rounded-sm border focus:outline-none outline-none focus:bg-white focus:border=gray-200"
+                          >
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                          </select>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="bg-gray-50 px-4 py-3 w-full flex justify-end">
                   <button
+                    @click="createIssue"
                     type="button"
                     class="w-16 block rounded-md border px-1 py-1 text-xs bg-main-normal font-medium text-white hover:bg-main-dark focus:outline-none outline-none sm:ml-3 sm:w-auto sm:text-sm"
                   >
                     Create
                   </button>
                   <button
+                    @click="clearIssueForm"
                     type="button"
                     class="w-16 block rounded-md px-1 py-1 text-xs bg-none font-medium text-main-normal hover:text-main-dark focus:outline-none outline-none sm:ml-3 sm:w-auto sm:text-sm"
                   >
@@ -418,12 +604,39 @@
         </div>
       </div>
     </div>
+    <div v-if="issueCreated"
+      class="absolute z-50 top-0 right-0 mt-20 bg-white px-3 py-3 shadow rounded-lg mr-5 animate-slide"
+    >
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="w-4 text-green-600"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clip-rule="evenodd"
+          />
+        </svg>
+         <p class="text-gray-600 text-sm ml-1">Issue created successfully</p>
+      </div>
+     
+    </div>
   </div>
 </template>
 <script>
 import Loader from "./Loader";
 import LeftSideBar from "./LeftSideBar";
-import { auth, getUser, getAuthUser } from "../config/functions";
+import {
+  auth,
+  db,
+  getUser,
+  getAuthUser,
+  uploadFile,
+  createIssue,
+} from "../config/functions";
 export default {
   name: "Dashboard",
   data() {
@@ -433,11 +646,28 @@ export default {
       isLoaded: false,
       compImage: true,
       open: false,
+      projectName: "",
       openAccAction: false,
+      openIssueModal: false,
+      content: "",
       name: "",
       tinyAPIKey: "",
-      content: "",
+      labelTyped: false,
+      isFileName: "",
+      fileSize: "",
+      attachmentURL: "",
+      uploadValue: 0,
+      upLoading: false,
+      issue: {
+        tags: [],
+        attachmentURL: null,
+        statusColor: "",
+        statusBackgroundColor: "",
+        priorityColor: "",
+        priorityBackgroundColor: "",
+      },
       getRoute: this.$route.fullPath.split("/")[4],
+      issueCreated: false,
     };
   },
   components: {
@@ -451,9 +681,7 @@ export default {
     hideMbMenu: function () {
       this.open = false;
     },
-    test() {
-      console.log("away");
-    },
+    test() {},
     openAccModal() {
       if (this.openAccAction === true) {
         this.openAccAction = false;
@@ -466,6 +694,226 @@ export default {
         this.$router.push({ path: "/login" });
       });
     },
+    addTag() {
+      const val = this.issue.labels;
+      if (val === "") {
+        return false;
+      }
+      this.issue.tags.push(val);
+      this.resetInput();
+      this.labelTyped = false;
+      // const array = this.issue.tags
+      // const duplicates  = array.filter((e, i, a) => a.indexOf(e) !== i)
+      // this.$refs.label.addEventListener('keypress',  () =>{
+      //   if(array === duplicates) {
+      //     this.resetInput();
+      //   return false
+      // }
+      // })
+    },
+    removeLabel(istag) {
+      const removeItem = this.issue.tags.filter((tag) => tag !== istag);
+      this.issue.tags = removeItem;
+    },
+    resetInput() {
+      this.$refs.label.value = "";
+      this.issue.labels = "";
+    },
+    handleFileUpload() {
+      this.$refs.uploadBtn.click();
+      this.$refs.uploadBtn.addEventListener("change", (e) => {
+        if (e.target.files) {
+          this.upLoading = true;
+        }
+        const fullPath = e.target.value;
+        if (fullPath) {
+          const startIndex =
+            fullPath.indexOf("\\") >= 0
+              ? fullPath.lastIndexOf("\\")
+              : fullPath.lastIndexOf("/");
+          let isFileName = fullPath.substring(startIndex);
+          if (isFileName.indexOf("\\") === 0 || isFileName.indexOf("/") === 0) {
+            isFileName = isFileName.substring(1);
+          }
+          localStorage.isFileName = isFileName;
+          setTimeout(() => {
+            this.$refs.isFileName.innerText = isFileName;
+          }, 0);
+        }
+        this.fileSize = e.target.files[0].size;
+        const uploadRef = uploadFile(
+          `${this.getRoute}/${this.isFileName}`,
+          (this.isFileName = e.target.files[0])
+        );
+        uploadRef.on(
+          "state_changed",
+          (snapshot) => {
+            this.uploadValue =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          },
+          (error) => {
+            error;
+          },
+          () => {
+            this.uploadValue = 100;
+            uploadRef.snapshot.ref.getDownloadURL().then((url) => {
+              this.attachmentURL = url;
+              this.issue.attachmentURL = url;
+            });
+          }
+        );
+      });
+    },
+    deleteFile() {
+      this.upLoading = false;
+      this.$refs.uploadBtn.value = "";
+    },
+    createIssue() {
+      if(this.$refs.summary.value === "") {
+        this.$refs.summaryError.style.display = "block"
+         this.$refs.summary.classList.add("border","border-red-500")
+         this.$refs.summary.classList.remove("focus:ring-1")
+        return false
+      }
+      else {
+        this.$refs.summaryError.style.display = "none"
+         this.$refs.summary.classList.remove("border","border-red-500")
+          this.$refs.summary.classList.add("focus:ring-1")
+      }
+      if(this.$refs.description.value === "") {
+        this.$refs.descriptionError.style.display = "block"
+         this.$refs.description.classList.add("border","border-red-500")
+          this.$refs.description.classList.remove("focus:ring-1")
+        return false
+      }
+      else {
+        this.$refs.descriptionError.style.display = "none"
+         this.$refs.description.classList.remove("border","border-red-500")
+          this.$refs.description.classList.add("focus:ring-1")
+      }
+      if(this.issue.status === "Open") {
+        this.issue.statusColor = "text-white" 
+        this.issue.statusBackgroundColor = "bg-green-400"
+      }
+      if(this.issue.status === "In Progress") {
+        this.issue.statusColor = "text-status-inProgressDark" 
+        this.issue.statusBackgroundColor = "bg-status-inProgressLight"
+      }
+      if(this.issue.status === "Fixed") {
+        this.issue.statusColor = "text-green-500" 
+        this.issue.statusBackgroundColor = "bg-green-200"
+      }
+      if(this.issue.status === "Closed") {
+        this.issue.statusColor = "text-red-500" 
+        this.issue.statusBackgroundColor = "bg-red-200"
+      }
+      if(this.issue.priority === "Low") {
+        this.issue.priorityColor = "text-white" 
+        this.issue.priorityBackgroundColor = "bg-yellow-300"
+      }
+      if(this.issue.priority === "Medium") {
+        this.issue.priorityColor = "text-white" 
+        this.issue.priorityBackgroundColor = "bg-green-400"
+      }
+      if(this.issue.priority === "High") {
+        this.issue.priorityColor = "text-white" 
+        this.issue.priorityBackgroundColor = "bg-red-600"
+      }
+      if(this.$refs.summary.value !== "" && this.$refs.description.value !== "") {
+        createIssue(this.getRoute, this.issue)
+        .then(docRef => {
+          docRef.update({
+            id: docRef.id,
+            projectid: this.getRoute
+          })
+        })
+        .then(() => {
+          this.issue.tags = []
+          this.issue.summary = ""
+          this.issue.description = ""
+          this.issue.statusColor = ""
+          this.issue.statusBackgroundColor = ""
+          this.issue.priorityColor = ""
+          this.issue.priorityBackgroundColor = ""
+          this.issue.labels = ""
+          this.$refs.summary.value = ""
+          this.$refs.description.value = ""
+          this.$refs.label.value = ""
+          this.openIssueModal = false;
+          this.$refs.uploadBtn.value = "";
+          this.upLoading = false;
+          this.issueCreated = true
+            setTimeout(() => {this.issueCreated = false},1500)
+        })
+          
+        .catch((error) => {
+          error
+        });
+      }
+    },
+    clearIssueForm() {
+      if (this.issue !== []) {
+        if (
+          confirm(
+            "You are currently creating an issue, any changes you made would not be saved"
+          )
+        ) {
+          document.getElementsByTagName("input").forEach(input => {
+            input.value === ""
+          })
+          this.issue.tags = []
+          this.openIssueModal = false;
+           this.issue.summary = ""
+          this.issue.description = ""
+          this.issue.statusColor = ""
+          this.issue.statusBackgroundColor = ""
+          this.issue.priorityColor = ""
+          this.issue.priorityBackgroundColor = ""
+          this.issue.labels = ""
+          this.$refs.summary.value = ""
+          this.$refs.description.value = ""
+          this.$refs.label.value = ""
+          this.$refs.uploadBtn.value = "";
+          this.upLoading = false;
+        } else {
+          return false;
+        }
+      }
+    },
+    generateColor(background, color, type) {
+      switch(type) {
+        case "Open": 
+           return {
+             color : "text-white",
+             background :"bg-green-400"
+           }
+        case "In Progress": 
+          color = "text-status-inProgressDark"
+          background = "bg-status-inProgressLight"
+          break;
+        case "Fixed": 
+          color = "text-green-500"
+          background = "bg-green-200"
+          break;
+        case "Closed": 
+          color = "text-red-500"
+          background = "bg-red-200"
+          break;
+        case "Low": 
+          color = "text-white"
+          background = "bg-yellow-300"
+          break;
+          case "Medium": 
+          color = "text-white"
+          background = "bg-green-400"
+          break;
+        case "High": 
+          color = "text-white"
+          background = "bg-red-600"
+          break;
+        
+      }
+    }
   },
   mounted() {
     setTimeout(() => {
@@ -476,9 +924,24 @@ export default {
         this.name = data.fullName;
       });
     });
+    // if(this.openIssueModal) {
+    //   this.$refs.label.addEventListener('keyup', () => {
+    //     this.labelTyped = true
+    //   })
+    // }
   },
   created() {
     this.tinyAPIKey = process.env.VUE_APP_EDITOR_API_KEY;
+    // if (this.$refs.description !== "" && this.$refs.summary !== "") {
+    //   window.addEventListener("beforeunload", (event) => {
+    //     event.returnValue = `Are you sure you want to leave?`;
+    //   });
+    // }
+    // if (this.$refs.description !== "" && this.$refs.summary !== "") {
+    //   window.onbeforeunload = function () {
+    //     return "handle your events or msgs here";
+    //   };
+    // }
   },
 };
 </script>

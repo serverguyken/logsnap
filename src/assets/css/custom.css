@@ -3,7 +3,7 @@
     --main-color: #17d8e2;
     --bg-color: #f3f8ff;
     --ghostsmoke: #fafbfc;
-    --modal-background:rgba(9, 30, 66, 0.54);
+    --modal-background: rgba(9, 30, 66, 0.54);
 }
 
 body {
@@ -237,13 +237,35 @@ body {
 .modal-bg {
     background: var(--modal-background);
 }
-.tooltip-text  {
+
+.tooltip-text {
     visibility: hidden;
 }
+
 .tooltip:hover .tooltip-text {
     visibility: visible;
 }
 
+.tags-con .tg {
+    display: inline-block;
+    word-wrap: break-word;
+}
+
+.input-dsnone {
+    opacity: 0;
+}
+
+progress {
+    background-color: white;
+}
+
+  progress::-webkit-progress-bar {
+    background-color: white;
+    border-radius: 7px;
+  }
+  progress::-webkit-progress-value {
+    background-color: var(--main-color);
+  }
 .animation-center {
     position: fixed;
     top: 50%;
@@ -454,6 +476,9 @@ body {
     .st-mb-top-header {
         display: none;
     }
+    .mb-create-issue {
+        display: none;
+    }
 }
 
 @media (min-width: 600px) {
@@ -582,10 +607,22 @@ body {
         margin-top: -15rem;
     }
     .cr-is-top {
-        margin-top: -6rem;
+        margin-top: -9rem;
     }
     .cr-modal {
         width: 100%;
+    }
+    .search-main {
+        width: 60%;
+    }
+    .search-main input {
+        width: 60%;
+    }
+    .add-is {
+        display: none;
+    }
+    .open-cc {
+        display: none;
     }
 }
 

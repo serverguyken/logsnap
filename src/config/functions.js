@@ -6,7 +6,7 @@ import router from '../router/routes'
 
 const auth = firebase.auth()
 const db = firebase.firestore()
-
+const storage = firebase.storage
 
 
 // Auth Functions
@@ -40,6 +40,9 @@ export const sendEmailVerification = (settings) => {
 // Database Functions
 export const userDB = db.collection("users")
 export const tenantDB = db.collection("tenants")
+export const uploadFile = (path,file) => {
+  return storage().ref(path).put(file)
+}
 
 export const getTenant = async id => {
   const tenant = await tenantDB.doc(id).get();
@@ -90,6 +93,63 @@ export const getAllProjects = async () => {
     })
   })
 }
+
+export const createIssue = async (projectPath,issueData) => {
+  return await getAuthUser().then(user => {
+    const isUserDB = userDB.doc(user.uid)
+    return isUserDB.collection("projects").doc(projectPath).collection("issues").add(issueData)
+  })
+}
+
+
+export const getAllIssues = async (projectPath) => {
+  return await getAuthUser().then(user => {
+    const isUserDB = userDB.doc(user.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").onSnapshot(querySnapshot => {
+      let issuesData = []
+      querySnapshot.forEach(doc => {
+        issuesData.push(doc.data())
+      })
+      store.commit('SET_ISSUES_DATAS', issuesData)
+    })
+  })
+}
+
+
+export const getIssue = async (projectPath,id)  => {
+  return await getAuthUser().then(user => {
+    const isUserDB = userDB.doc(user.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).get().then(data => {
+      store.commit('SET_ISSUE', data.data())
+    })
+  })
+}
+
+export const updateIssue = async (projectPath,id,data)  => {
+  return await getAuthUser().then(user => {
+    const isUserDB = userDB.doc(user.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).update(data)
+  })
+}
+export const deleteIssue = async (projectPath,id,data)  => {
+  return await getAuthUser().then(user => {
+    const isUserDB = userDB.doc(user.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).delete()
+  })
+}
+
+// export const getAllIssues = async () => {
+//   return await getAuthUser().then(user => {
+//     const isUserDB = userDB.doc(user.uid)
+//     isUserDB.collection("projects").orderBy('name', 'asc').onSnapshot(querySnapshot => {
+//       let projectDatas = []
+//       querySnapshot.forEach(doc => {
+//         projectDatas.push(doc.data())
+//       })
+//       store.commit('SET_PROJECTS_DATAS', projectDatas)
+//     })
+//   })
+// }
 // Database Functions
 
 
@@ -107,5 +167,7 @@ export const getPreviousRoute = () => {
 }
 
 export {
-  auth
+  auth,
+  db,
+  storage
 }

@@ -10,7 +10,7 @@ import Contact from '../components/Contact.vue'
 import Projects from '../components/Projects.vue'
 // import ProjectCreate from '../components/ProjectCreate.vue'
 import Issues from '../components/Issues.vue'
-import EditViewIssue from '../components/EditViewIssue.vue'
+import Issue from '../components/Issue.vue'
 import Backlog from '../components/Backlog.vue'
 import Todo from '../components/Todo.vue'
 import ProfileSettings from '../components/ProfileSettings.vue'
@@ -113,8 +113,8 @@ const routes = [
         path: "/dashboard/project/issues/:id",
         component: Issues,
         meta: {
-            title: "Projects | LogSnap",
-            requiresAuth: true
+            title: "Issues | LogSnap",
+            requiresAuth: true,
         },
     },
     {
@@ -145,8 +145,8 @@ const routes = [
     // },
     {
         name: "Issue",
-        path: "/dashboard/issues/:id",
-        component: EditViewIssue,
+        path: "/dashboard/project/issue/viewissue/:projectid/:id",
+        component: Issue,
         meta: {
             title: "Issue",
             requiresAuth: true
@@ -269,6 +269,8 @@ router.afterEach((to, from, next) => {
     next
     from
 });
+
+
 
 
 router.beforeEach(async(to, from, next) => {

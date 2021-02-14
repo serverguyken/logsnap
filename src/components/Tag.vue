@@ -11,7 +11,7 @@ export default {
     props: {
       status: {
         type: String,
-            default: "Tag Name"
+            default: ""
       },
         color: {
             type: String,

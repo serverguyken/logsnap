@@ -6,7 +6,7 @@
         <div class="issue-main h-screen p-4 mt-5">
           <div class="issues-contents">
             <div class="open-closed-filter">
-              <div class="o-c flex items-center">
+              <!-- <div class="o-c flex items-center">
                 <div class="o">
                   <button
                     @click="isFilteredOpenShow()"
@@ -25,7 +25,7 @@
                     CLOSED<span ref="closedCount">(196)</span>
                   </button>
                 </div>
-              </div>
+              </div> -->
             </div>
 
             <h1 class="mt-6 text-gray-60">Your Isuues</h1>
