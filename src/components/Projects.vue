@@ -244,7 +244,7 @@
           <div
             class="hover:bg-gray-300 rounded relative"
           >
-            <svg
+            <svg  @click.prevent="deleteProject(projectData.path); isModalOpened = false"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"

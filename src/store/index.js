@@ -59,8 +59,13 @@ const actions = {
     async deleteProject ({commit },path)  {
          await getAuthUser().then(user => {
           const isUserDB = userDB.doc(user.uid)
+           if(confirm("Areyou sure?")) {
             isUserDB.collection("projects").doc(path).delete()
             commit('DELETE_PROJECT', path)
+           }
+           else {
+               return false
+           }
         })
       }
 

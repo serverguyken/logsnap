@@ -105,7 +105,6 @@ export default {
           break;
       }
     }, 1000);
-    console.log(this.$route);
   },
 };
 </script>
