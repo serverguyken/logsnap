@@ -91,7 +91,7 @@
           <div class="mb-create-issue">
             <button
               class="bg-main-dark outline-none rounded px-1 py-1 focus:outline-none"
-              @click="openCreateModal"
+             @click="openIssueModal = true"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
