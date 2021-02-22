@@ -15,6 +15,10 @@ body {
     padding-right: 1.2rem;
 }
 
+.bg-color {
+    background-color: var(--bg-color) !important;
+}
+
 .skdsd .bg-color {
     background-color: var(--bg-color);
 }
@@ -188,7 +192,7 @@ body {
 }
 
 .dash-middle {
-    padding-left: 13.54rem;
+    padding-left: 10.54rem;
 }
 
 .issues-contents {
@@ -205,6 +209,7 @@ body {
 
 .dash-mb-sidebar {
     top: 3.50rem;
+    z-index: 1000 !important;
 }
 
 .active {
@@ -259,13 +264,21 @@ progress {
     background-color: white;
 }
 
-  progress::-webkit-progress-bar {
+progress::-webkit-progress-bar {
     background-color: white;
     border-radius: 7px;
-  }
-  progress::-webkit-progress-value {
+}
+
+progress::-webkit-progress-value {
     background-color: var(--main-color);
-  }
+}
+
+.pro-card {
+    border-top: 3px solid rgb(205, 205, 1);
+}
+
+
+
 .animation-center {
     position: fixed;
     top: 50%;
@@ -278,8 +291,8 @@ progress {
 }
 
 .animate-slide {
-    animation: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s 1 normal both running slide;
-    -webkit-animation: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s 1 normal both running slide;
+    animation: 0.5s slide;
+    -webkit-animation: 0.5s slide;
 }
 
 .animate-reveal-infinite {
@@ -337,8 +350,10 @@ progress {
 @keyframes slide {
     0% {
         opacity: 0;
+        animation:  cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s 1 normal both running;
+        -webkit-animation:  cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s 1 normal both running;
         transform: translate3d(0px, -10px, 0px);
-    }
+}
     100% {
         opacity: 1;
         transform: none;
@@ -685,6 +700,12 @@ progress {
         position: fixed;
         left: 0;
         margin-top: 9px;
+    }
+    .issue-main-view {
+        display: block;
+    }
+    .issue-data {
+        width: 100%;
     }
 }
 

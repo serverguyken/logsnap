@@ -3,7 +3,7 @@
     <div id="page-issues">
       <LeftCard v-if="mobile" />
       <Dashboard>
-        <div class="issue-main h-screen p-4 mt-5">
+        <div class="issue-main h-screen space-mb-sides">
           <div class="issues-contents">
             <div class="open-closed-filter">
               <!-- <div class="o-c flex items-center">

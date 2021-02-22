@@ -2,7 +2,7 @@
   <div>
     <div id="aside-left" class="border-r">
       <aside class="fixed  shadow-none  left-0 bg-ghostsmoke  border-r border-gray-100  dark:bg-gray-800  h-screen">
-        <div class="left-main mt-5 space-mb-sides p-4">
+        <div class="left-main mt-1 space-mb-sides p-4">
           <div class="cmp-pf-con flex items-center">
             <div
               class="comp-img rd-cn rounded-xl p-1 bg-gray-100"

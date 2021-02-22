@@ -91,7 +91,7 @@
           <div class="mb-create-issue">
             <button
               class="bg-main-dark outline-none rounded px-1 py-1 focus:outline-none"
-             @click="openIssueModal = true"
+              @click="openIssueModal = true"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +189,7 @@
 
       <div
         ref="dashMBMenu"
-        class="dash-mb-sidebar overflow-y-hidden z-50 fixed border-t shadow-lg animate-slideright"
+        class="dash-mb-sidebar overflow-y-hidden fixed z-50 border-t shadow-lg animate-slideright"
         v-if="open"
       >
         <aside class="bg-white border-r dark:bg-gray-800 h-screen">
@@ -197,7 +197,7 @@
             <div class="cmp-pf-con flex items-center">
               <div
                 class="comp-img rd-cn rounded-xl p-1 bg-gray-100"
-                v-if="compImage"
+                v-if="!compImage"
               >
                 <img
                   src="https://res.cloudinary.com/serveryguken/image/upload/v1612385665/Projects/logsnap/logo/LogSnap-icon_cp7dgm.png"
@@ -205,8 +205,8 @@
                   class="w-8"
                 />
               </div>
-              <div class="comp-img bg-blue-600 rd-cn-sm" v-if="!compImage">
-                <h1 class="text-white font-medium">E</h1>
+              <div class="comp-img bg-blue-600 rd-cn-sm" v-if="compImage" :style="color">
+                <h1 class="text-white font-medium">{{initals}}</h1>
               </div>
               <div class="cmp-text ml-3">
                 <h1 ref="workspaceName" class="text-xs font-medium">
@@ -347,7 +347,7 @@
         </aside>
       </div>
     </div>
-    <div class="issue-modal " v-if="openIssueModal">
+    <div class="issue-modal" v-if="openIssueModal">
       <div class="modal">
         <div class="modal-contents">
           <div class="fixed z-50 inset-0 overflow-y-auto">
@@ -395,7 +395,12 @@
                           ref="summary"
                           class="bg-gray-200 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
                         />
-                        <p class="text-xs text-red-600 hidden" ref="summaryError">Summary can't be empty</p>
+                        <p
+                          class="text-xs text-red-600 hidden"
+                          ref="summaryError"
+                        >
+                          Summary can't be empty
+                        </p>
                       </div>
                       <div class="dsc-group mt-1">
                         <div class="mt-2">
@@ -415,7 +420,12 @@
                             >
                             </textarea>
                           </div>
-                          <p class="text-xs text-red-600 hidden" ref="descriptionError">Summary can't be empty</p>
+                          <p
+                            class="text-xs text-red-600 hidden"
+                            ref="descriptionError"
+                          >
+                            Summary can't be empty
+                          </p>
                         </div>
                       </div>
                       <div class="label-group mt-1">
@@ -604,8 +614,9 @@
         </div>
       </div>
     </div>
-    <div v-if="issueCreated"
-      class="absolute z-50 top-0 right-0 mt-20 bg-white px-3 py-3 shadow rounded-lg mr-5 animate-slide"
+    <div
+      v-if="issueCreated"
+      class="fixed z-50 top-14 right-0  bg-white px-3 py-3 shadow rounded-lg mr-5 animate-slide"
     >
       <div class="flex items-center">
         <svg
@@ -620,9 +631,8 @@
             clip-rule="evenodd"
           />
         </svg>
-         <p class="text-gray-600 text-sm ml-1">Issue created successfully</p>
+        <p class="text-gray-600 text-sm ml-1">Issue created successfully</p>
       </div>
-     
     </div>
   </div>
 </template>
@@ -645,6 +655,8 @@ export default {
       componetLoaded: false,
       isLoaded: false,
       compImage: true,
+      initals: '',
+      color: '',
       open: false,
       projectName: "",
       openAccAction: false,
@@ -769,86 +781,89 @@ export default {
       this.$refs.uploadBtn.value = "";
     },
     createIssue() {
-      if(this.$refs.summary.value === "") {
-        this.$refs.summaryError.style.display = "block"
-         this.$refs.summary.classList.add("border","border-red-500")
-         this.$refs.summary.classList.remove("focus:ring-1")
-        return false
+      if (this.$refs.summary.value === "") {
+        this.$refs.summaryError.style.display = "block";
+        this.$refs.summary.classList.add("border", "border-red-500");
+        this.$refs.summary.classList.remove("focus:ring-1");
+        return false;
+      } else {
+        this.$refs.summaryError.style.display = "none";
+        this.$refs.summary.classList.remove("border", "border-red-500");
+        this.$refs.summary.classList.add("focus:ring-1");
       }
-      else {
-        this.$refs.summaryError.style.display = "none"
-         this.$refs.summary.classList.remove("border","border-red-500")
-          this.$refs.summary.classList.add("focus:ring-1")
+      if (this.$refs.description.value === "") {
+        this.$refs.descriptionError.style.display = "block";
+        this.$refs.description.classList.add("border", "border-red-500");
+        this.$refs.description.classList.remove("focus:ring-1");
+        return false;
+      } else {
+        this.$refs.descriptionError.style.display = "none";
+        this.$refs.description.classList.remove("border", "border-red-500");
+        this.$refs.description.classList.add("focus:ring-1");
       }
-      if(this.$refs.description.value === "") {
-        this.$refs.descriptionError.style.display = "block"
-         this.$refs.description.classList.add("border","border-red-500")
-          this.$refs.description.classList.remove("focus:ring-1")
-        return false
+      if (this.issue.status === "Open") {
+        this.issue.statusColor = "text-white";
+        this.issue.statusBackgroundColor = "bg-green-400";
       }
-      else {
-        this.$refs.descriptionError.style.display = "none"
-         this.$refs.description.classList.remove("border","border-red-500")
-          this.$refs.description.classList.add("focus:ring-1")
+      if (this.issue.status === "In Progress") {
+        this.issue.statusColor = "text-status-inProgressDark";
+        this.issue.statusBackgroundColor = "bg-status-inProgressLight";
       }
-      if(this.issue.status === "Open") {
-        this.issue.statusColor = "text-white" 
-        this.issue.statusBackgroundColor = "bg-green-400"
+      if (this.issue.status === "Fixed") {
+        this.issue.statusColor = "text-green-500";
+        this.issue.statusBackgroundColor = "bg-green-200";
       }
-      if(this.issue.status === "In Progress") {
-        this.issue.statusColor = "text-status-inProgressDark" 
-        this.issue.statusBackgroundColor = "bg-status-inProgressLight"
+      if (this.issue.status === "Closed") {
+        this.issue.statusColor = "text-red-500";
+        this.issue.statusBackgroundColor = "bg-red-200";
       }
-      if(this.issue.status === "Fixed") {
-        this.issue.statusColor = "text-green-500" 
-        this.issue.statusBackgroundColor = "bg-green-200"
+      if (this.issue.priority === "Low") {
+        this.issue.priorityColor = "text-white";
+        this.issue.priorityBackgroundColor = "bg-yellow-300";
       }
-      if(this.issue.status === "Closed") {
-        this.issue.statusColor = "text-red-500" 
-        this.issue.statusBackgroundColor = "bg-red-200"
+      if (this.issue.priority === "Medium") {
+        this.issue.priorityColor = "text-white";
+        this.issue.priorityBackgroundColor = "bg-green-400";
       }
-      if(this.issue.priority === "Low") {
-        this.issue.priorityColor = "text-white" 
-        this.issue.priorityBackgroundColor = "bg-yellow-300"
+      if (this.issue.priority === "High") {
+        this.issue.priorityColor = "text-white";
+        this.issue.priorityBackgroundColor = "bg-red-600";
       }
-      if(this.issue.priority === "Medium") {
-        this.issue.priorityColor = "text-white" 
-        this.issue.priorityBackgroundColor = "bg-green-400"
-      }
-      if(this.issue.priority === "High") {
-        this.issue.priorityColor = "text-white" 
-        this.issue.priorityBackgroundColor = "bg-red-600"
-      }
-      if(this.$refs.summary.value !== "" && this.$refs.description.value !== "") {
+      if (
+        this.$refs.summary.value !== "" &&
+        this.$refs.description.value !== ""
+      ) {
         createIssue(this.getRoute, this.issue)
-        .then(docRef => {
-          docRef.update({
-            id: docRef.id,
-            projectid: this.getRoute
+          .then((docRef) => {
+            docRef.update({
+              id: docRef.id,
+              projectid: this.getRoute,
+            });
           })
-        })
-        .then(() => {
-          this.issue.tags = []
-          this.issue.summary = ""
-          this.issue.description = ""
-          this.issue.statusColor = ""
-          this.issue.statusBackgroundColor = ""
-          this.issue.priorityColor = ""
-          this.issue.priorityBackgroundColor = ""
-          this.issue.labels = ""
-          this.$refs.summary.value = ""
-          this.$refs.description.value = ""
-          this.$refs.label.value = ""
-          this.openIssueModal = false;
-          this.$refs.uploadBtn.value = "";
-          this.upLoading = false;
-          this.issueCreated = true
-            setTimeout(() => {this.issueCreated = false},1500)
-        })
-          
-        .catch((error) => {
-          error
-        });
+          .then(() => {
+            this.issue.tags = [];
+            this.issue.summary = "";
+            this.issue.description = "";
+            this.issue.statusColor = "";
+            this.issue.statusBackgroundColor = "";
+            this.issue.priorityColor = "";
+            this.issue.priorityBackgroundColor = "";
+            this.issue.labels = "";
+            this.$refs.summary.value = "";
+            this.$refs.description.value = "";
+            this.$refs.label.value = "";
+            this.openIssueModal = false;
+            this.$refs.uploadBtn.value = "";
+            this.upLoading = false;
+            this.issueCreated = true;
+            setTimeout(() => {
+              this.issueCreated = false;
+            }, 1500);
+          })
+
+          .catch((error) => {
+            error;
+          });
       }
     },
     clearIssueForm() {
@@ -858,21 +873,21 @@ export default {
             "You are currently creating an issue, any changes you made would not be saved"
           )
         ) {
-          document.getElementsByTagName("input").forEach(input => {
-            input.value === ""
-          })
-          this.issue.tags = []
+          document.getElementsByTagName("input").forEach((input) => {
+            input.value === "";
+          });
+          this.issue.tags = [];
           this.openIssueModal = false;
-           this.issue.summary = ""
-          this.issue.description = ""
-          this.issue.statusColor = ""
-          this.issue.statusBackgroundColor = ""
-          this.issue.priorityColor = ""
-          this.issue.priorityBackgroundColor = ""
-          this.issue.labels = ""
-          this.$refs.summary.value = ""
-          this.$refs.description.value = ""
-          this.$refs.label.value = ""
+          this.issue.summary = "";
+          this.issue.description = "";
+          this.issue.statusColor = "";
+          this.issue.statusBackgroundColor = "";
+          this.issue.priorityColor = "";
+          this.issue.priorityBackgroundColor = "";
+          this.issue.labels = "";
+          this.$refs.summary.value = "";
+          this.$refs.description.value = "";
+          this.$refs.label.value = "";
           this.$refs.uploadBtn.value = "";
           this.upLoading = false;
         } else {
@@ -881,41 +896,58 @@ export default {
       }
     },
     generateColor(background, color, type) {
-      switch(type) {
-        case "Open": 
-           return {
-             color : "text-white",
-             background :"bg-green-400"
-           }
-        case "In Progress": 
-          color = "text-status-inProgressDark"
-          background = "bg-status-inProgressLight"
+      switch (type) {
+        case "Open":
+          return {
+            color: "text-white",
+            background: "bg-green-400",
+          };
+        case "In Progress":
+          color = "text-status-inProgressDark";
+          background = "bg-status-inProgressLight";
           break;
-        case "Fixed": 
-          color = "text-green-500"
-          background = "bg-green-200"
+        case "Fixed":
+          color = "text-green-500";
+          background = "bg-green-200";
           break;
-        case "Closed": 
-          color = "text-red-500"
-          background = "bg-red-200"
+        case "Closed":
+          color = "text-red-500";
+          background = "bg-red-200";
           break;
-        case "Low": 
-          color = "text-white"
-          background = "bg-yellow-300"
+        case "Low":
+          color = "text-white";
+          background = "bg-yellow-300";
           break;
-          case "Medium": 
-          color = "text-white"
-          background = "bg-green-400"
+        case "Medium":
+          color = "text-white";
+          background = "bg-green-400";
           break;
-        case "High": 
-          color = "text-white"
-          background = "bg-red-600"
+        case "High":
+          color = "text-white";
+          background = "bg-red-600";
           break;
-        
       }
-    }
+    },
   },
   mounted() {
+     const getInitials = function (name) {
+      var parts = name.split(' ')
+      var initials = ''
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i].length > 0 && parts[i] !== '') {
+          initials += parts[i][0]
+        }
+      }
+      return initials
+    }
+     this.getRoute = this.$route.fullPath.split('/')[4]
+      getAuthUser().then(user => {
+       getUser(user.uid).then(user => {
+       this.name = user.fullName
+       this.initals = getInitials(this.name)
+       this.color = `background-color: ${user.coloruserSetActive};`
+    })
+    })
     setTimeout(() => {
       this.isLoaded = true;
     }, 1000);
