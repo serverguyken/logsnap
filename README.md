@@ -26,9 +26,9 @@
 ##  Features
 
 - Create Issues
-- Create Todos
+- Create Todos - coming soon
 - View Issues
-- Comment
+- Comment - coming soon
 - Update Issues
 - Delete Issues
 - Isuue Labels
