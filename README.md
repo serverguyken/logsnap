@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <a href="https://logsnap.site">
+  <a href="https://logsnap.app">
     <img src="https://res.cloudinary.com/serveryguken/image/upload/v1612386754/Projects/logsnap/logo/LogSnap-main_xppj6x.svg" width="400" height="200"> 
   </a>
 </p>
