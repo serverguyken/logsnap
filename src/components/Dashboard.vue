@@ -309,7 +309,7 @@
                   </router-link>
                 </li> -->
 
-                <li class="mb-1 p-1 dash-link">
+                <!-- <li class="mb-1 p-1 dash-link">
                   <router-link
                     to="/dashboard/settings"
                     class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
@@ -340,7 +340,7 @@
                       <p class="text-sm font-medium text-gray-600">Settings</p>
                     </div>
                   </router-link>
-                </li>
+                </li> -->
                 <li class="mb-1 p-1 dash-link">
                   <button
                     class="lg-btn bg-main-normal shadow rounded text-sm text-white py-1 hover:bg-main-light mt-3 w-24 outline-none focus:outline-none"

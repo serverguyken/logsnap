@@ -23,6 +23,24 @@ body {
     background-color: var(--bg-color);
 }
 
+.text-yellow {
+    color: #f9ff21;
+}
+.bg-yellow {
+    background-color: #f9ff21;
+}
+.bg-blue {
+    background-color: #482ff7;
+}
+.bg-khaki {
+    background-color: #ffc972;
+}
+.bg-salmon {
+    background-color: #ff9b73;
+}
+.bg-plum {
+    background-color: #b692fe;
+}
 .ds-nav-con {
     max-width: 1200px;
 }
@@ -502,14 +520,15 @@ progress::-webkit-progress-value {
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     .todo-data {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .todo-card {
-        width: 9rem;
+        width: 15rem;
     }
 }
+
 @media (max-width: 1000px) {
     .pricing-cards {
         display: flex;
@@ -729,6 +748,13 @@ progress::-webkit-progress-value {
         width: 100%;
         max-width: 100%;
     }
+    .todo-data {
+        display: block;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .todo-card {
+        width: 15rem;
+    }
 }
 
 /*  Button loader */
@@ -832,4 +858,8 @@ progress::-webkit-progress-value {
 
 .todoText::-webkit-scrollbar {
     display: none;
+}
+
+.dash-mb-sidebar {
+    z-index: 999999 !important;
 }

@@ -112,7 +112,7 @@
                 </router-link>
               </li> -->
 
-              <li class="mb-1 p-1 dash-link">
+              <!-- <li class="mb-1 p-1 dash-link">
                 <router-link
                   to="/settings/account/profile"
                   class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
@@ -143,7 +143,7 @@
                     <p class="text-sm font-medium text-gray-600">Settings</p>
                   </div>
                 </router-link>
-              </li>
+              </li> -->
             </ul>
           </div>
         </div>

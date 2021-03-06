@@ -98,6 +98,89 @@ export const createIssue = async (projectPath: any, issueData: any) => {
   })
 }
 
+export const getIssue = async (projectPath: any, id: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).get().then(data => {
+      store.commit('SET_ISSUE', data.data())
+    })
+  })
+}
+
+export const updateIssue = async (projectPath: any, id: any, data: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).update(data)
+  })
+}
+
+
+export const deleteIssue = async (projectPath: any, id: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).delete()
+  })
+}
+
+export const getAllIssues = async (projectPath: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("issues").orderBy('timestamp', 'asc').onSnapshot(querySnapshot => {
+      let issuesData: any = []
+      querySnapshot.forEach(doc => {
+        console.log(doc.data());
+        issuesData.push(doc.data());
+      })
+      store.commit('SET_ISSUES_DATAS', issuesData)
+    })
+  })
+}
+export const createTodo = async (projectPath: any, todoData: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    return isUserDB.collection("projects").doc(projectPath).collection("todos").add(todoData)
+  })
+}
+
+export const updateTodo = async (projectPath: any, id: any, data: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("todos").doc(id).update(data)
+  })
+}
+
+export const deleteTodo = async (projectPath: any, id: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("todos").doc(id).delete()
+  })
+}
+
+export const getTodos = async (projectPath: any) => {
+  return await getAuthUser().then(user => {
+    const uuser: any = user
+    const isUserDB = userDB.doc(uuser.uid)
+    isUserDB.collection("projects").doc(projectPath).collection("todos").orderBy('timestamp', 'desc').onSnapshot(querySnapshot => {
+      let todosData: any = []
+      querySnapshot.forEach(doc => {
+        todosData.push(doc.data());
+      })
+      store.commit('SET_TODOS', todosData)
+    })
+  })
+}
+
+
+
+
+
 export const getProjectPath = async (path: any) => {
   if(path === undefined) {
     throw new Error ("Path not specified")
@@ -175,59 +258,6 @@ export const getPath = async (projectPath: any, path: any, collection: string) =
   })
 }
 
-export const getAllIssues = async (projectPath: any) => {
-  return await getAuthUser().then(user => {
-    const uuser: any = user
-    const isUserDB = userDB.doc(uuser.uid)
-    isUserDB.collection("projects").doc(projectPath).collection("issues").orderBy('timestamp', 'desc').onSnapshot(querySnapshot => {
-      let issuesData: any = []
-      querySnapshot.forEach(doc => {
-        console.log(doc.data());
-        issuesData.push(doc.data());
-      })
-      store.commit('SET_ISSUES_DATAS', issuesData)
-    })
-  })
-}
-
-
-export const getIssue = async (projectPath: any, id: any) => {
-  return await getAuthUser().then(user => {
-    const uuser: any = user
-    const isUserDB = userDB.doc(uuser.uid)
-    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).get().then(data => {
-      store.commit('SET_ISSUE', data.data())
-    })
-  })
-}
-
-export const updateIssue = async (projectPath: any, id: any, data: any) => {
-  return await getAuthUser().then(user => {
-    const uuser: any = user
-    const isUserDB = userDB.doc(uuser.uid)
-    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).update(data)
-  })
-}
-export const deleteIssue = async (projectPath: any, id: any, data: any) => {
-  return await getAuthUser().then(user => {
-    const uuser: any = user
-    const isUserDB = userDB.doc(uuser.uid)
-    isUserDB.collection("projects").doc(projectPath).collection("issues").doc(id).delete()
-  })
-}
-
-// export const getAllIssues = async () => {
-//   return await getAuthUser().then(user => {
-//     const isUserDB = userDB.doc(user.uid)
-//     isUserDB.collection("projects").orderBy('name', 'asc').onSnapshot(querySnapshot => {
-//       let projectDatas = []
-//       querySnapshot.forEach(doc => {
-//         projectDatas.push(doc.data())
-//       })
-//       store.commit('SET_PROJECTS_DATAS', projectDatas)
-//     })
-//   })
-// }
 // Database Functions
 
 

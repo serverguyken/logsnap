@@ -11,6 +11,7 @@ const state = {
     isWorkSpaceName: "",
     issuesDatas: [],
     getIssue: [],
+    todos: [],
 };
 
 const getters = {
@@ -35,6 +36,7 @@ const getters = {
     getWorkSpaceName: (state) => state.isisWorkSpaceName,
     getIssuesDatas: (state) => state.issuesDatas,
     getIssueData: (state) => state.getIssue,
+    getTodos: (state) => state.todos,
 };
 
 const actions = {
@@ -96,7 +98,10 @@ const mutations = {
     },
     SET_ISSUE (state, data) {
          state.getIssue = data
-    }
+    },
+    SET_TODOS (state, data) {
+         state.todos = data
+    },
 };
 
 
