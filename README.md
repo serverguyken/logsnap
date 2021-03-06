@@ -26,7 +26,7 @@
 ##  Features
 
 - Create Issues
-- Create Todos - coming soon
+- Create Todos
 - View Issues
 - Comment - coming soon
 - Update Issues
