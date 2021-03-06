@@ -145,7 +145,7 @@
             <div class="gtpsdp">
               <router-link
                 to="/settings/account/profile"
-                class="acc0slk px-4 py-2 flex  items-center hover:bg-gray-100"
+                class="acc0slk px-4 py-2 flex items-center hover:bg-gray-100"
               >
                 <div class="text-gray-600">Account Settings</div>
                 <div class="flfs ml-4">
@@ -167,11 +167,12 @@
               </router-link>
 
               <div class="prtd">
-                <router-link to="/dashboard/projects" class="flex px-4 py-2 mt-3 hover:bg-gray-100">
-                <div class="text-gray-600">
-                  Projects
-                </div>
-              </router-link>
+                <router-link
+                  to="/dashboard/projects"
+                  class="flex px-4 py-2 mt-3 hover:bg-gray-100"
+                >
+                  <div class="text-gray-600">Projects</div>
+                </router-link>
               </div>
               <button
                 class="lg-btn hover:bg-gray-100 mt-3 w-full text-left px-4 py-2 outline-none focus:outline-none"
@@ -255,6 +256,32 @@
                   </router-link>
                 </li>
 
+                <li class="mb-1 p-1 dash-link">
+                  <router-link
+                    :to="{ name: 'Todos', params: { id: getRoute } }"
+                    class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
+                  >
+                    <div class="icon-con">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        class="w-4"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                        />
+                      </svg>
+                    </div>
+                    <div class="link-txt ml-3">
+                      <p class="text-sm font-medium text-gray-600">Todos</p>
+                    </div>
+                  </router-link>
+                </li>
                 <!-- <li class="mb-1 p-1 dash-link">
                   <router-link
                     :to="{ name: 'Backlog', params: { id: getRoute } }"
@@ -278,33 +305,6 @@
                     </div>
                     <div class="link-txt ml-3">
                       <p class="text-sm font-medium text-gray-600">Backlog</p>
-                    </div>
-                  </router-link>
-                </li> -->
-
-                <!-- <li class="mb-1 p-1 dash-link">
-                  <router-link
-                    :to="{ name: 'Todo', params: { id: getRoute } }"
-                    class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
-                  >
-                    <div class="icon-con">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        class="w-4"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                        />
-                      </svg>
-                    </div>
-                    <div class="link-txt ml-3">
-                      <p class="text-sm font-medium text-gray-600">Todo</p>
                     </div>
                   </router-link>
                 </li> -->
@@ -998,9 +998,9 @@ export default {
     // }
   },
   created() {
-    setTimeout(() =>{
+    setTimeout(() => {
       this.isLoading = false;
-    },500)
+    }, 500);
     this.tinyAPIKey = process.env.VUE_APP_EDITOR_API_KEY;
     // if (this.$refs.description !== "" && this.$refs.summary !== "") {
     //   window.addEventListener("beforeunload", (event) => {

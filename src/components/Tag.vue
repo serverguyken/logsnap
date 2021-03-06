@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="tag">
-      <div :class="[color,backgroundColor,textSize]">{{status}}</div>
+    <div class="tag w-16 max-w-md text-center">
+      <div :class="[rounded,color,backgroundColor,textSize]">{{status}}</div>
     </div>
   </div>
 </template>
@@ -9,6 +9,10 @@
 export default {
     name: "Tag",
     props: {
+      rounded: {
+        type: String,
+        default: "rounded-sm"
+      },
       status: {
         type: String,
             default: ""

@@ -80,7 +80,7 @@
                     </svg>
                   </div>
                   <div class="link-txt ml-3">
-                    <p class="text-sm font-medium text-gray-600">Todo</p>
+                    <p class="text-sm font-medium text-gray-600">Todos</p>
                   </div>
                 </router-link>
               </li>
