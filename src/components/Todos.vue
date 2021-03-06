@@ -40,9 +40,9 @@
                     @click="addTodo('bg-yellow')"
                   ></div>
                   <div
-                    class="color cursor-pointer ml-2 w-4 h-4 rounded-full flex justify-center items-center bg-blue"
+                    class="color cursor-pointer ml-2 w-4 h-4 rounded-full flex justify-center items-center bg-tomato"
                     ref="bg-blue"
-                    @click="addTodo('bg-blue')"
+                    @click="addTodo('bg-tomato')"
                   ></div>
                   <div
                     class="color cursor-pointer ml-2 w-4 h-4 rounded-full flex justify-center items-center bg-khaki"

@@ -10,12 +10,13 @@
     >
       <div class="">
         <div class="to-text-con flex">
-          <div
+          <textarea
             aria-describedby="placeholder-todo-add"
-            class="todo-Editor todoText p-1 text-sm text-black font-medium w-10/12 h-24 max-h-sm focus:outline-none border-none resize-none overflow-scroll inline-block"
+            :class="[todo.cardColor, 'todo-Editor todoText p-1 text-sm  text-black font-medium w-10/12 h-24 max-h-sm focus:outline-none border-none resize-none overflow-scroll inline-block']"
             contenteditable="true"
             role="textbox"
             ref="todoTitle"
+            :value="todo.title"
             spellcheck="true"
             style="
               outline: none;
@@ -26,8 +27,7 @@
             @blur="updateTodoTitle(todo.id, $event)"
             @keyup="updateTodoTitle(todo.id, $event)"
           >
-            {{ todo.title }}
-          </div>
+          </textarea>
           <div class="completed ml-4" v-if="todo.completed">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ export default {
     },
     updateTodoTitle(id, event) {
       updateTodo(this.projectPath, id, {
-        title: event.target.innerText,
+        title: event.target.value,
       });
     },
     deleteTodo(id) {
