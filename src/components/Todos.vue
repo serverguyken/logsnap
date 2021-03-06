@@ -7,7 +7,7 @@
             <div class="mt-5">
               <div class="flex items-center">
                 <div class="td-txt">
-                  <h1 class="text-black text-3xl font-semibold">Todo</h1>
+                  <h1 class="text-black text-3xl font-semibold">Todos</h1>
                 </div>
                 <button
                   class="add-icon focus:outline-none bg-main-normal text-white rounded-full h-8 w-8 flex items-center justify-center ml-3"
