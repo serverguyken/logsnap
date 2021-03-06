@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-data pb-10 grid grid-cols-3">
+  <div class="todo-data pb-8 grid grid-cols-3">
     <div
       :class="[
         todo.cardColor,
