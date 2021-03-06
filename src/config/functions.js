@@ -108,7 +108,6 @@ export const getAllIssues = async (projectPath) => {
         isUserDB.collection("projects").doc(projectPath).collection("issues").orderBy('timestamp', 'asc').onSnapshot(querySnapshot => {
             let issuesData = [];
             querySnapshot.forEach(doc => {
-                console.log(doc.data());
                 issuesData.push(doc.data());
             });
             store.commit('SET_ISSUES_DATAS', issuesData);
@@ -216,7 +215,6 @@ export const getPath = async (projectPath, path, collection) => {
                     .collection("todos")
                     .get()
                     .then((doc) => {
-                    console.log("checking if todo path is valid ....");
                     if (!doc.exists) {
                         location.href = "/dashboard/projects";
                     }

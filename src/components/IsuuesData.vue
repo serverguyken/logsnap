@@ -203,7 +203,7 @@ export default {
       issues: [],
       tags: [],
       issuePath: "",
-       getRoute: this.$route.fullPath.split("/")[4],
+       getRoute: this.$route.fullPath.split("/")[4].split("?")[0],
     };
   },
   methods: {
@@ -220,7 +220,7 @@ export default {
   },
   computed: mapGetters(["getIssuesDatas"]),
   created() {
-    getAllIssues(this.$route.fullPath.split("/")[4]);
+    getAllIssues(this.getRoute);
   },
   watch: {
     '$store.getters.getIssuesDatas': function() {

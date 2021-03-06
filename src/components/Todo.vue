@@ -3,7 +3,7 @@
     <div
       :class="[
         todo.cardColor,
-        'mt-4 mr-2 todo-card   w-60  p-3 rounded-lg shadow-sm animate-pulse animate-reveal  animate__animated animate__bounceInDown',
+        'mt-4 mr-2 todo-card   w-60  p-3 rounded-lg shadow-sm animate-slidedown',
       ]"
       v-for="todo in getTodos"
       :key="todo.id"

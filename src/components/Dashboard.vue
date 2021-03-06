@@ -138,12 +138,12 @@
                 </div> -->
           </div>
           <div
-            class="absolute z-50 right-0 mr-4 open-cc bg-white border-t shadow rounded-sm p-2 animate-slide"
-            style="margin-top: 13.65rem"
+            class="absolute z-50 right-0 mr-4 open-cc w-60 bg-white border-t shadow rounded-sm p-2 animate-slide"
+            style="margin-top: 11.10rem"
             v-if="openAccAction"
           >
             <div class="gtpsdp">
-              <router-link
+              <!-- <router-link
                 to="/settings/account/profile"
                 class="acc0slk px-4 py-2 flex items-center hover:bg-gray-100"
               >
@@ -164,7 +164,7 @@
                     />
                   </svg>
                 </div>
-              </router-link>
+              </router-link> -->
 
               <div class="prtd">
                 <router-link
@@ -405,13 +405,13 @@
                           v-model="issue.summary"
                           required
                           ref="summary"
-                          class="bg-gray-200 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
+                          class="bg-gray-100 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
                         />
                         <p
                           class="text-xs text-red-600 hidden"
                           ref="summaryError"
                         >
-                          Summary can't be empty
+                          Summary is required
                         </p>
                       </div>
                       <div class="dsc-group mt-1">
@@ -421,14 +421,14 @@
                           </p>
                         </div>
                         <div class="mt-o">
-                          <div class="cnt-area border w-full">
+                          <div class="cnt-area  w-full">
                             <textarea
                               name="content"
                               v-model="issue.description"
                               ref="description"
                               required
                               id="descContent"
-                              class="w-full p-1 h-30 text-sm max-h-56 focus:outline-none outline-none appearance-none"
+                              class="bg-gray-100 w-full p-1 h-30 text-sm max-h-56 focus:outline-none outline-none appearance-none"
                             >
                             </textarea>
                           </div>
@@ -436,7 +436,7 @@
                             class="text-xs text-red-600 hidden"
                             ref="descriptionError"
                           >
-                            Summary can't be empty
+                            Description is required
                           </p>
                         </div>
                       </div>
@@ -452,7 +452,7 @@
                             ref="label"
                             v-model="issue.labels"
                             @input="labelTyped = true"
-                            class="bg-gray-200 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
+                            class="bg-gray-100 text-sm py-1 text-gray-600 rounded-sm w-full focus:outline-none pl-2 focus:bg-white focus:ring-1 focus:ring-main-normal appearance-none"
                             @keydown.enter="addTag"
                           />
                           <div
@@ -579,7 +579,7 @@
                         <div class="selecxt">
                           <select
                             v-model="issue.status"
-                            class="w-2/4 bg-gray-200 py-1 text-sm rounded-sm border focus:outline-none outline-none focus:bg-white focus:border=gray-200"
+                            class="w-2/4 bg-gray-100 py-1 text-sm rounded-sm border focus:outline-none outline-none focus:bg-white focus:border=gray-200"
                           >
                             <option value="Open">Open</option>
                             <option value="In Progress">In Progress</option>
@@ -593,7 +593,7 @@
                           <p class="text-xs text-gray-600">Priority</p>
                           <select
                             v-model="issue.priority"
-                            class="w-2/4 bg-gray-200 py-1 text-sm rounded-sm border focus:outline-none outline-none focus:bg-white focus:border=gray-200"
+                            class="w-2/4 bg-gray-100 py-1 text-sm rounded-sm border focus:outline-none outline-none focus:bg-white focus:border=gray-200"
                           >
                             <option value="Low">Low</option>
                             <option value="Medium">Medium</option>
@@ -669,6 +669,7 @@ export default {
     return {
       isScrolling: false,
       componetLoaded: false,
+      enabled: false,
       isLoading: true,
       compImage: true,
       initals: "",
@@ -699,7 +700,7 @@ export default {
         createdAt: null,
         targetDate: null,
       },
-      getRoute: this.$route.fullPath.split("/")[4],
+      getRoute: this.$route.fullPath.split("/")[4].split("?")[0],
       issueCreated: false,
     };
   },
@@ -721,7 +722,6 @@ export default {
     hideMbMenu: function () {
       this.open = false;
     },
-    test() {},
     openAccModal() {
       if (this.openAccAction === true) {
         this.openAccAction = false;
@@ -799,6 +799,7 @@ export default {
             uploadRef.snapshot.ref.getDownloadURL().then((url) => {
               this.attachmentURL = url;
               this.issue.attachmentURL = url;
+              localStorage.isFileName = '';
             });
           }
         );
@@ -807,9 +808,12 @@ export default {
     deleteFile() {
       this.upLoading = false;
       this.$refs.uploadBtn.value = "";
+      localStorage.isFileName = '';
     },
     createIssue() {
-      if (this.$refs.summary.value === "") {
+      this.enabled = true
+      if(this.enabled) {
+        if (this.$refs.summary.value === "") {
         this.$refs.summaryError.style.display = "block";
         this.$refs.summary.classList.add("border", "border-red-500");
         this.$refs.summary.classList.remove("focus:ring-1");
@@ -889,12 +893,14 @@ export default {
             this.issueCreated = true;
             setTimeout(() => {
               this.issueCreated = false;
-            }, 1500);
+              this.$router.replace(this.$route.path)
+            }, 1000);
           })
 
           .catch((error) => {
             error;
           });
+      }
       }
     },
     clearIssueForm() {
@@ -924,6 +930,8 @@ export default {
           this.$refs.label.value = "";
           this.$refs.uploadBtn.value = "";
           this.upLoading = false;
+          this.$route.query.modalOpen = false
+         
         } else {
           return false;
         }
@@ -986,32 +994,16 @@ export default {
     setTimeout(() => {
       this.isLoaded = true;
     }, 1000);
-    getAuthUser().then((user) => {
-      getUser(user.uid).then((data) => {
-        this.name = data.fullName;
-      });
-    });
-    // if(this.openIssueModal) {
-    //   this.$refs.label.addEventListener('keyup', () => {
-    //     this.labelTyped = true
-    //   })
-    // }
   },
   created() {
+    //  if(this.$route.query.modalOpen === "true") {
+    //   this.openIssueModal = true;
+    //   this.enabled = true
+    // }
     setTimeout(() => {
       this.isLoading = false;
     }, 500);
-    this.tinyAPIKey = process.env.VUE_APP_EDITOR_API_KEY;
-    // if (this.$refs.description !== "" && this.$refs.summary !== "") {
-    //   window.addEventListener("beforeunload", (event) => {
-    //     event.returnValue = `Are you sure you want to leave?`;
-    //   });
-    // }
-    // if (this.$refs.description !== "" && this.$refs.summary !== "") {
-    //   window.onbeforeunload = function () {
-    //     return "handle your events or msgs here";
-    //   };
-    // }
+    
   },
 };
 </script>

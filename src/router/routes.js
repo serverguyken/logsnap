@@ -111,7 +111,7 @@ const routes = [
     },
     {
         name: "Issues",
-        path: "/dashboard/project/issues/:id",
+        path: "/dashboard/project/issues/:id?",
         component: Issues,
         meta: {
             title: "Issues | LogSnap",
