@@ -12,7 +12,7 @@
         <div class="to-text-con flex">
           <div
             aria-describedby="placeholder-todo-add"
-            class="todo-Editor todoText p-1 text-sm text-black font-medium w-10/12 h-24 max-h-sm focus:outline-none border-none resize-none overflow-scroll"
+            class="todo-Editor todoText p-1 text-sm text-black font-medium w-10/12 h-24 max-h-sm focus:outline-none border-none resize-none overflow-scroll inline-block"
             contenteditable="true"
             role="textbox"
             ref="todoTitle"
