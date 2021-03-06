@@ -11,8 +11,9 @@ import Projects from '../components/Projects.vue'
 // import ProjectCreate from '../components/ProjectCreate.vue'
 import Issues from '../components/Issues.vue'
 import Issue from '../components/Issue.vue'
+import Notes from '../components/Notes.vue'
 import Backlog from '../components/Backlog.vue'
-import Todo from '../components/Todo.vue'
+import Todos from '../components/Todos.vue'
 import ProfileSettings from '../components/ProfileSettings.vue'
 import NotificationsSettings from '../components/NotificationsSettings.vue'
 import PreferencesSettings from '../components/PreferencesSettings.vue'
@@ -118,6 +119,24 @@ const routes = [
         },
     },
     {
+        name: "Notes",
+        path: "/dashboard/project/notes/:id",
+        component: Notes,
+        meta: {
+            title: "Notes | LogSnap",
+            requiresAuth: true,
+        },
+    },
+    {
+        name: "Todos",
+        path: "/dashboard/project/todos/:id",
+        component: Todos,
+        meta: {
+            title: "Todos | LogSnap",
+            requiresAuth: true
+        },
+    },
+    {
         name: "Backlog",
         path: "/dashboard/project/backlog/:id",
         component: Backlog,
@@ -126,15 +145,7 @@ const routes = [
             requiresAuth: true
         },
     },
-    {
-        name: "Todo",
-        path: "/dashboard/project/todo/:id",
-        component: Todo,
-        meta: {
-            title: "Todo | LogSnap",
-            requiresAuth: true
-        },
-    },
+    
     // {
     //     path: "/dashboard/projects/create",
     //     component: ProjectCreate,

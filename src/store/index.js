@@ -9,7 +9,7 @@ const state = {
     projectDatas: [],
     getPreviousRoute: "",
     isWorkSpaceName: "",
-    issuesData: [],
+    issuesDatas: [],
     getIssue: [],
 };
 
@@ -33,7 +33,7 @@ const getters = {
     }),
     getPreviousRoute: (state) => state.getPreviousRoute,
     getWorkSpaceName: (state) => state.isisWorkSpaceName,
-    getIssuesDatas: (state) => state.issuesData,
+    getIssuesDatas: (state) => state.issuesDatas,
     getIssueData: (state) => state.getIssue,
 };
 
@@ -92,7 +92,7 @@ const mutations = {
         state.isWorkSpaceName = workSpaceName
     },
     SET_ISSUES_DATAS (state, data) {
-        state.issuesData = data
+        state.issuesDatas = data
     },
     SET_ISSUE (state, data) {
          state.getIssue = data

@@ -338,6 +338,7 @@
   </div>
 </template>
 <script>
+import {  getProjectPath, getPath } from "../config/functions";
 import { mapGetters } from "vuex";
 import {
   getIssue,
@@ -384,20 +385,12 @@ export default {
     updateIssue() {
       const summaryNewValue = this.$refs.summary.value;
       const descriptionNewValue = this.$refs.description.value;
-      const tagsNewValue = this.$refs.tag.innerHTML;
       const statusNewValue = this.$refs.status.value;
       const priorityNewValue = this.$refs.priority.value;
       let statusColor = "";
       let statusBackgroundColor = "";
       let priorityColor = "";
       let priorityBackgroundColor = "";
-      console.log(
-        summaryNewValue,
-        descriptionNewValue,
-        tagsNewValue,
-        statusNewValue,
-        priorityNewValue
-      );
 
       if (this.$refs.status.value === "Open") {
         statusColor = "text-white";
@@ -463,7 +456,7 @@ export default {
           this.$router.push({
             path: `/dashboard/project/issues/${this.getProjectPath}`,
           });
-        }, 1800);
+        }, 1000);
       } else {
         return false;
       }
@@ -474,6 +467,11 @@ export default {
     },
   },
   computed: mapGetters(["getIssueData"]),
+  mounted() {
+      // getProjectPath(this.getProjectPath)
+      console.log(this.getIssueID);
+      getPath(this.getProjectPath,this.getIssueID,"Issues")
+  },
   created() {
     getIssue(this.getProjectPath, this.getIssueID);
     getAuthUser().then((user) => {

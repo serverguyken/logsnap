@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tag">
-      <span :class="[color,backgroundColor,textSize]">{{status}}</span>
+      <div :class="[color,backgroundColor,textSize]">{{status}}</div>
     </div>
   </div>
 </template>

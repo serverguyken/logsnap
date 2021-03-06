@@ -502,6 +502,14 @@ progress::-webkit-progress-value {
     }
 }
 
+@media (max-width: 900px) {
+    .todo-data {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .todo-card {
+        width: 9rem;
+    }
+}
 @media (max-width: 1000px) {
     .pricing-cards {
         display: flex;
@@ -520,9 +528,6 @@ progress::-webkit-progress-value {
         font-size: 14px !important;
     }
     .status-con {
-        display: none;
-    }
-    .created-at {
         display: none;
     }
     .priority {
@@ -637,6 +642,9 @@ progress::-webkit-progress-value {
         display: none;
     }
     .open-cc {
+        display: none;
+    }
+    .created {
         display: none;
     }
 }
@@ -820,4 +828,8 @@ progress::-webkit-progress-value {
     100% {
         transform: translateX(100%);
     }
+}
+
+.todoText::-webkit-scrollbar {
+    display: none;
 }

@@ -1,8 +1,7 @@
 <template>
-  <div>       <div class="" v-if="actionClicked" @click="actionClicked = false">
-        
-    </div>
-    <div class="issues-data-hd bg-gray-100 text-gray-400 p-2 mt-3">
+  <div>
+    <div id="issuedata" class="issuedata" v-if="loaded">
+      <div class="issues-data-hd bg-gray-100 text-gray-400 p-2 mt-3">
       <div class="grid grid-cols-5">
         <div class="flex items-center">
           <!-- <div class="issue-name">
@@ -19,8 +18,8 @@
           <h1 class="text-sm">Priority</h1>
         </div>
         <div class="aside-fl-flex grid grid-cols-2 items-center col-start-5">
-          <div class="created-at">
-            <h1 class="text-sm">Tags</h1>
+          <div class="created">
+            <h1 class="text-sm">Created</h1>
           </div>
           <!-- <div class="action col-start-6 col-end-5">
             <h1 class="text-sm">Action</h1>
@@ -28,13 +27,18 @@
         </div>
       </div>
     </div>
-        <div
+    <div
       class="issues-list mt-3 hover:bg-gray-100 cursor-pointer px-1 py-2 rounded"
       v-for="issue in getIssuesDatas"
       :key="issue.id"
     >
-    
-      <router-link class="grid grid-cols-5 items-center"  :to="{name: 'Issue', params: {projectid: issue.projectid, id: issue.id}, }">
+      <router-link
+        class="grid grid-cols-5 items-center"
+        :to="{
+          name: 'Issue',
+          params: { projectid: issue.projectid, id: issue.id },
+        }"
+      >
         <div class="issues-flex flex items-center">
           <div class="issue-id-con flex items-center">
             <svg
@@ -49,7 +53,7 @@
                 clip-rule="evenodd"
               />
             </svg>
-           <!-- <div class="issue-short-desc ml-2 max-w-xs w-20 whitespace-nowrap">
+            <!-- <div class="issue-short-desc ml-2 max-w-xs w-20 whitespace-nowrap">
             <h1
               class="text-gray-500 font-medium ml-1 overflow-hidden overflow-ellipsis"
               ref="description"
@@ -84,6 +88,11 @@
           />
         </div>
         <div class="aisde-fl grid grid-cols-2 items-center col-start-5">
+          <div class="-ml-1 mt-1 created">
+            <span class="text-xs text-gray-600">
+              {{ issue.createdAt }} <br />
+            </span>
+          </div>
           <!-- <div class="created-at mr-5">
             <h1 class="text-sm">{{ issue.createdAt }}</h1>
           </div> -->
@@ -172,14 +181,16 @@
           </div> -->
         </div>
       </router-link>
-      
-      </div>
+    </div>
+    </div>
   </div>
 </template>
 <script>
-import { getAllIssues } from "../config/functions"
+import { getAllIssues, getIssue, getProjectPath } from "../config/functions";
+import store from "../store";
+
 import Tag from "./Tag";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   name: "IssuesList",
   components: {
@@ -187,30 +198,34 @@ export default {
   },
   data() {
     return {
+      loaded: false,
       actionClicked: false,
       issues: [],
-      issuePath: ''
-    }
+      tags: [],
+      issuePath: "",
+       getRoute: this.$route.fullPath.split("/")[4],
+    };
   },
   methods: {
     showAction() {
-     if(this.actionClicked === false) {
-       this.actionClicked = true
-     }
-     else {
-       this.actionClicked = false
-     }
+      if (this.actionClicked === false) {
+        this.actionClicked = true;
+      } else {
+        this.actionClicked = false;
+      }
     },
-     editTask: function(task){
-            task.editing = false;
-            console.log(task);
-    }
   },
   mounted() {
+    getProjectPath(this.getRoute)
   },
-  computed: mapGetters(['getIssuesDatas']),
+  computed: mapGetters(["getIssuesDatas"]),
   created() {
-    getAllIssues(this.$route.fullPath.split("/")[4])
+    getAllIssues(this.$route.fullPath.split("/")[4]);
+  },
+  watch: {
+    '$store.getters.getIssuesDatas': function() {
+        this.loaded = true
+    }
   }
 };
 </script>

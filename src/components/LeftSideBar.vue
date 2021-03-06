@@ -1,7 +1,9 @@
 <template>
   <div>
     <div id="aside-left" class="border-r">
-      <aside class="fixed  shadow-none  left-0 bg-ghostsmoke  border-r border-gray-100  dark:bg-gray-800  h-screen">
+      <aside
+        class="fixed shadow-none left-0 bg-white border-r border-gray-100 dark:bg-gray-800 h-screen"
+      >
         <div class="left-main mt-1 space-mb-sides p-4">
           <div class="cmp-pf-con flex items-center">
             <div
@@ -14,12 +16,16 @@
                 class="w-8"
               />
             </div>
-            <div class="comp-img  rd-cn-sm ml-1" v-if="!compImage" :style="color">
-              <h1 class="text-white text-sm  font-medium">{{initals}}</h1>
+            <div
+              class="comp-img rd-cn-sm ml-1"
+              v-if="!compImage"
+              :style="color"
+            >
+              <h1 class="text-white text-sm font-medium">{{ initals }}</h1>
             </div>
             <div class="cmp-text ml-3">
               <h1 ref="workspaceName" class="text-xs font-medium">
-                {{name}}
+                {{ name }}
               </h1>
             </div>
           </div>
@@ -27,8 +33,8 @@
             <ul class="mt-4">
               <li class="mb-1 p-1 dash-link">
                 <router-link
-                  :to="{name: 'Issues', params: {id: getRoute}}"
-                  class=" flex items-center p-2 hover:bg-gray-100 rounded text-sm"
+                  :to="{ name: 'Issues', params: { id: getRoute } }"
+                  class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
                 >
                   <div class="icon-con">
                     <svg
@@ -48,6 +54,33 @@
                   </div>
                   <div class="link-txt ml-3">
                     <p class="text-sm font-medium text-gray-600">Issues</p>
+                  </div>
+                </router-link>
+              </li>
+
+              <li class="mb-1 p-1 dash-link">
+                <router-link
+                  :to="{ name: 'Todos', params: { id: getRoute } }"
+                  class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
+                >
+                  <div class="icon-con">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      class="w-4"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+                      />
+                    </svg>
+                  </div>
+                  <div class="link-txt ml-3">
+                    <p class="text-sm font-medium text-gray-600">Todo</p>
                   </div>
                 </router-link>
               </li>
@@ -75,33 +108,6 @@
                   </div>
                   <div class="link-txt ml-3">
                     <p class="text-sm font-medium text-gray-600">Backlog</p>
-                  </div>
-                </router-link>
-              </li>
-
-              <li class="mb-1 p-1 dash-link">
-                <router-link
-                  :to="{name: 'Todo', params: {id: getRoute}}"
-                  class="flex items-center p-2 hover:bg-gray-100 rounded text-sm"
-                >
-                  <div class="icon-con">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      class="w-4"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-                      />
-                    </svg>
-                  </div>
-                  <div class="link-txt ml-3">
-                    <p class="text-sm font-medium text-gray-600">Todo</p>
                   </div>
                 </router-link>
               </li> -->
@@ -146,37 +152,37 @@
   </div>
 </template>
 <script>
-import { getUser, getAuthUser,} from '../config/functions'
+import { getUser, getAuthUser } from "../config/functions";
 export default {
   name: "LeftSideBar",
   data() {
     return {
       compImage: false,
-      getRoute: this.$route.fullPath.split('/')[4],
+      getRoute: this.$route.fullPath.split("/")[4],
       name: "",
       color: "",
       initals: "",
     };
   },
   mounted() {
-     const getInitials = function (name) {
-      var parts = name.split(' ')
-      var initials = ''
+    const getInitials = function (name) {
+      var parts = name.split(" ");
+      var initials = "";
       for (var i = 0; i < parts.length; i++) {
-        if (parts[i].length > 0 && parts[i] !== '') {
-          initials += parts[i][0]
+        if (parts[i].length > 0 && parts[i] !== "") {
+          initials += parts[i][0];
         }
       }
-      return initials
-    }
-    this.getRoute = this.$route.fullPath.split('/')[4]
-      getAuthUser().then(user => {
-       getUser(user.uid).then(user => {
-       this.name = user.fullName
-       this.initals = getInitials(this.name)
-       this.color = `background-color: ${user.coloruserSetActive};`
-    })
-    })
-  }
+      return initials;
+    };
+    this.getRoute = this.$route.fullPath.split("/")[4];
+    getAuthUser().then((user) => {
+      getUser(user.uid).then((user) => {
+        this.name = user.fullName;
+        this.initals = getInitials(this.name);
+        this.color = `background-color: ${user.coloruserSetActive};`;
+      });
+    });
+  },
 };
 </script>

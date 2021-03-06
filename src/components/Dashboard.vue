@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="loader-comp">
-      <Loader v-if="!isLoaded" />
+      <Loader v-if="isLoading" />
     </div>
-    <div id="page-dashboard" v-if="isLoaded">
+    <div id="page-dashboard" v-if="!isLoading">
       <div
         class="dash-top-flex flex items-center fixed w-full border-b bg-white"
       >
@@ -139,13 +139,13 @@
           </div>
           <div
             class="absolute z-50 right-0 mr-4 open-cc bg-white border-t shadow rounded-sm p-2 animate-slide"
-            style="margin-top: 10.45rem"
+            style="margin-top: 13.65rem"
             v-if="openAccAction"
           >
             <div class="gtpsdp">
               <router-link
                 to="/settings/account/profile"
-                class="acc0slk px-4 py-2 flex items-center hover:bg-gray-100"
+                class="acc0slk px-4 py-2 flex  items-center hover:bg-gray-100"
               >
                 <div class="text-gray-600">Account Settings</div>
                 <div class="flfs ml-4">
@@ -165,6 +165,14 @@
                   </svg>
                 </div>
               </router-link>
+
+              <div class="prtd">
+                <router-link to="/dashboard/projects" class="flex px-4 py-2 mt-3 hover:bg-gray-100">
+                <div class="text-gray-600">
+                  Projects
+                </div>
+              </router-link>
+              </div>
               <button
                 class="lg-btn hover:bg-gray-100 mt-3 w-full text-left px-4 py-2 outline-none focus:outline-none"
                 @click="logOut"
@@ -205,8 +213,12 @@
                   class="w-8"
                 />
               </div>
-              <div class="comp-img bg-blue-600 rd-cn-sm" v-if="compImage" :style="color">
-                <h1 class="text-white font-medium">{{initals}}</h1>
+              <div
+                class="comp-img bg-blue-600 rd-cn-sm"
+                v-if="compImage"
+                :style="color"
+              >
+                <h1 class="text-white font-medium">{{ initals }}</h1>
               </div>
               <div class="cmp-text ml-3">
                 <h1 ref="workspaceName" class="text-xs font-medium">
@@ -589,6 +601,10 @@
                           </select>
                         </div>
                       </div>
+                      <!-- <div class="date-select mt-3">
+                        <p class="text-xs text-gray-600">Created At</p>
+                        <p class="text-sm text-gray-600">{{ issue.createdAt }}</p>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -616,7 +632,7 @@
     </div>
     <div
       v-if="issueCreated"
-      class="fixed z-50 top-14 right-0  bg-white px-3 py-3 shadow rounded-lg mr-5 animate-slide"
+      class="fixed z-50 top-14 right-0 bg-white px-3 py-3 shadow rounded-lg mr-5 animate-slide"
     >
       <div class="flex items-center">
         <svg
@@ -653,10 +669,10 @@ export default {
     return {
       isScrolling: false,
       componetLoaded: false,
-      isLoaded: false,
+      isLoading: true,
       compImage: true,
-      initals: '',
-      color: '',
+      initals: "",
+      color: "",
       open: false,
       projectName: "",
       openAccAction: false,
@@ -673,10 +689,15 @@ export default {
       issue: {
         tags: [],
         attachmentURL: null,
+        status: "",
+        priority: "",
         statusColor: "",
         statusBackgroundColor: "",
         priorityColor: "",
         priorityBackgroundColor: "",
+        timestamp: Date.now(),
+        createdAt: null,
+        targetDate: null,
       },
       getRoute: this.$route.fullPath.split("/")[4],
       issueCreated: false,
@@ -687,6 +708,13 @@ export default {
     LeftSideBar,
   },
   methods: {
+    getFormattedDate() {
+      const todayTime = new Date();
+      const month = todayTime.getMonth() + 1;
+      const day = todayTime.getDate();
+      const year = todayTime.getFullYear();
+      return month + "/" + day + "/" + year;
+    },
     showMbMenu: function () {
       this.open = true;
     },
@@ -849,6 +877,9 @@ export default {
             this.issue.priorityColor = "";
             this.issue.priorityBackgroundColor = "";
             this.issue.labels = "";
+            this.issue.status = "";
+            this.issue.priority = "";
+            this.labelTyped = false;
             this.$refs.summary.value = "";
             this.$refs.description.value = "";
             this.$refs.label.value = "";
@@ -885,6 +916,9 @@ export default {
           this.issue.priorityColor = "";
           this.issue.priorityBackgroundColor = "";
           this.issue.labels = "";
+          this.labelTyped = false;
+          this.issue.status = "";
+          this.issue.priority = "";
           this.$refs.summary.value = "";
           this.$refs.description.value = "";
           this.$refs.label.value = "";
@@ -895,59 +929,60 @@ export default {
         }
       }
     },
-    generateColor(background, color, type) {
-      switch (type) {
-        case "Open":
-          return {
-            color: "text-white",
-            background: "bg-green-400",
-          };
-        case "In Progress":
-          color = "text-status-inProgressDark";
-          background = "bg-status-inProgressLight";
-          break;
-        case "Fixed":
-          color = "text-green-500";
-          background = "bg-green-200";
-          break;
-        case "Closed":
-          color = "text-red-500";
-          background = "bg-red-200";
-          break;
-        case "Low":
-          color = "text-white";
-          background = "bg-yellow-300";
-          break;
-        case "Medium":
-          color = "text-white";
-          background = "bg-green-400";
-          break;
-        case "High":
-          color = "text-white";
-          background = "bg-red-600";
-          break;
-      }
-    },
+    // generateColor(background, color, type) {
+    //   switch (type) {
+    //     case "Open":
+    //       return {
+    //         color: "text-white",
+    //         background: "bg-green-400",
+    //       };
+    //     case "In Progress":
+    //       color = "text-status-inProgressDark";
+    //       background = "bg-status-inProgressLight";
+    //       break;
+    //     case "Fixed":
+    //       color = "text-green-500";
+    //       background = "bg-green-200";
+    //       break;
+    //     case "Closed":
+    //       color = "text-red-500";
+    //       background = "bg-red-200";
+    //       break;
+    //     case "Low":
+    //       color = "text-white";
+    //       background = "bg-yellow-300";
+    //       break;
+    //     case "Medium":
+    //       color = "text-white";
+    //       background = "bg-green-400";
+    //       break;
+    //     case "High":
+    //       color = "text-white";
+    //       background = "bg-red-600";
+    //       break;
+    //   }
+    // },
   },
   mounted() {
-     const getInitials = function (name) {
-      var parts = name.split(' ')
-      var initials = ''
+    this.issue.createdAt = this.getFormattedDate();
+    const getInitials = function (name) {
+      var parts = name.split(" ");
+      var initials = "";
       for (var i = 0; i < parts.length; i++) {
-        if (parts[i].length > 0 && parts[i] !== '') {
-          initials += parts[i][0]
+        if (parts[i].length > 0 && parts[i] !== "") {
+          initials += parts[i][0];
         }
       }
-      return initials
-    }
-     this.getRoute = this.$route.fullPath.split('/')[4]
-      getAuthUser().then(user => {
-       getUser(user.uid).then(user => {
-       this.name = user.fullName
-       this.initals = getInitials(this.name)
-       this.color = `background-color: ${user.coloruserSetActive};`
-    })
-    })
+      return initials;
+    };
+    this.getRoute = this.$route.fullPath.split("/")[4];
+    getAuthUser().then((user) => {
+      getUser(user.uid).then((user) => {
+        this.name = user.fullName;
+        this.initals = getInitials(this.name);
+        this.color = `background-color: ${user.coloruserSetActive};`;
+      });
+    });
     setTimeout(() => {
       this.isLoaded = true;
     }, 1000);
@@ -963,6 +998,9 @@ export default {
     // }
   },
   created() {
+    setTimeout(() =>{
+      this.isLoading = false;
+    },500)
     this.tinyAPIKey = process.env.VUE_APP_EDITOR_API_KEY;
     // if (this.$refs.description !== "" && this.$refs.summary !== "") {
     //   window.addEventListener("beforeunload", (event) => {

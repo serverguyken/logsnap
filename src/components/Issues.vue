@@ -73,38 +73,38 @@ export default {
         this.open = false;
       }, 100);
     },
-    isFilteredOpenShow() {
-      this.$refs.openBtn.classList.add("active");
-      this.$refs.closedBtn.classList.remove("active");
-      this.isFilterOpen = true;
-      this.isFilterClosed = false;
-      const isFiltredState = "isFilterOpen";
-      localStorage.isFiltredState = isFiltredState;
-    },
-    isFilteredClosedShow() {
-      this.$refs.openBtn.classList.remove("active");
-      this.$refs.closedBtn.classList.add("active");
-      this.$refs.openBtn.classList.add("border-r-0");
-      this.isFilterClosed = true;
-      this.isFilterOpen = false;
-      const isFiltredState = "isFilterClosed";
-      localStorage.isFiltredState = isFiltredState;
-    },
+    // isFilteredOpenShow() {
+    //   this.$refs.openBtn.classList.add("active");
+    //   this.$refs.closedBtn.classList.remove("active");
+    //   this.isFilterOpen = true;
+    //   this.isFilterClosed = false;
+    //   const isFiltredState = "isFilterOpen";
+    //   localStorage.isFiltredState = isFiltredState;
+    // },
+    // isFilteredClosedShow() {
+    //   this.$refs.openBtn.classList.remove("active");
+    //   this.$refs.closedBtn.classList.add("active");
+    //   this.$refs.openBtn.classList.add("border-r-0");
+    //   this.isFilterClosed = true;
+    //   this.isFilterOpen = false;
+    //   const isFiltredState = "isFilterClosed";
+    //   localStorage.isFiltredState = isFiltredState;
+    // },
   },
-  mounted() {
-    setTimeout(() => {
-      switch (localStorage.isFiltredState) {
-        case "isFilterOpen":
-          this.isFilteredOpenShow();
-          break;
-        case "isFilterClosed":
-          this.isFilteredClosedShow();
-          break;
-        default:
-          this.isFilteredOpenShow();
-          break;
-      }
-    }, 1000);
-  },
+  // mounted() {
+  //   setTimeout(() => {
+  //     switch (localStorage.isFiltredState) {
+  //       case "isFilterOpen":
+  //         this.isFilteredOpenShow();
+  //         break;
+  //       case "isFilterClosed":
+  //         this.isFilteredClosedShow();
+  //         break;
+  //       default:
+  //         this.isFilteredOpenShow();
+  //         break;
+  //     }
+  //   }, 1000);
+  // },
 };
 </script>
