@@ -9,7 +9,7 @@
 <br />
 
 <p align="center">
-<img alt="Website" src="https://img.shields.io/website?up_message=online&url=https%3A%2F%2Flogsnap.site">
+<img alt="Website" src="https://img.shields.io/website?up_message=online&url=https%3A%2F%2Flogsnap.app">
 <img alt="GitHub" src="https://img.shields.io/github/license/serverguyken/logsnap">
 <img alt="Twitter URL" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fserverguyken">
 </p>
